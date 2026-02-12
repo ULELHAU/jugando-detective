@@ -6,35 +6,26 @@
 <title>Jugando a ser Detective — Taller de Anonimización</title>
 <style>
   :root {
-    --ink: #1a1a2e;
-    --paper: #f5f0e8;
-    --accent: #c0392b;
-    --accent2: #2c3e50;
-    --green: #27ae60;
-    --muted: #7f8c8d;
-    --card-bg: #fffdf7;
-    --shadow: 0 2px 12px rgba(0,0,0,0.08);
-    --radius: 6px;
+    --ink: #1a1a2e; --paper: #f5f0e8; --accent: #c0392b; --accent2: #2c3e50;
+    --green: #27ae60; --muted: #7f8c8d; --card-bg: #fffdf7;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08); --radius: 6px;
     --font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     --font-mono: 'Consolas', 'Courier New', monospace;
     --font-display: Georgia, 'Times New Roman', serif;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: var(--font-body); background: var(--paper); color: var(--ink); line-height: 1.6; min-height: 100vh; }
-
   .topbar { background: var(--ink); color: var(--paper); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
   .topbar h1 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; letter-spacing: 0.5px; }
   .topbar h1 span { color: var(--accent); font-weight: 700; }
   .nav-btns { display: flex; gap: 6px; flex-wrap: wrap; }
   .nav-btn { background: transparent; color: var(--paper); border: 1px solid rgba(245,240,232,0.3); padding: 6px 14px; border-radius: var(--radius); cursor: pointer; font-size: 0.82rem; transition: all 0.2s; font-family: var(--font-body); }
   .nav-btn:hover, .nav-btn.active { background: var(--accent); border-color: var(--accent); }
-
   .section { display: none; max-width: 960px; margin: 0 auto; padding: 32px 24px 60px; }
   .section.active { display: block; }
   h2 { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 8px; color: var(--accent2); }
   h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 24px 0 8px; color: var(--accent); }
   p { margin-bottom: 12px; }
-
   .card { background: var(--card-bg); border: 1px solid #e0dbd2; border-radius: var(--radius); padding: 24px; margin: 16px 0; box-shadow: var(--shadow); }
   .card.report { border-left: 4px solid var(--accent); font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.7; white-space: pre-wrap; }
   .card.report .header-block { font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #e0dbd2; }
@@ -43,7 +34,6 @@
   .card.news { border-left: 4px solid #e67e22; }
   .card.email { border-left: 4px solid #8e44ad; }
   .card.anon { border-left: 4px solid var(--green); }
-
   .label-tag { display: inline-block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 3px; margin-bottom: 10px; font-family: var(--font-body); font-weight: 700; }
   .label-tag.report-tag { background: #fde8e8; color: var(--accent); }
   .label-tag.org-tag { background: #e8edf2; color: var(--accent2); }
@@ -51,14 +41,11 @@
   .label-tag.news-tag { background: #fef3e2; color: #ca6f1e; }
   .label-tag.email-tag { background: #f3e8fd; color: #7d3c98; }
   .label-tag.anon-tag { background: #e8f8ef; color: #1e8449; }
-
   .qi { background: #fff3cd; padding: 1px 4px; border-radius: 2px; border-bottom: 2px solid #f0ad4e; }
-
   .org-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 12px; }
   .org-table th { background: var(--accent2); color: white; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
   .org-table td { padding: 8px 12px; border-bottom: 1px solid #e0dbd2; }
   .org-table tr:nth-child(even) { background: rgba(0,0,0,0.02); }
-
   .social-post { border: 1px solid #e0dbd2; border-radius: var(--radius); padding: 16px; margin: 12px 0; background: white; }
   .social-post .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .social-post .avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: white; }
@@ -67,7 +54,6 @@
   .social-post .post-body { font-size: 0.9rem; line-height: 1.5; }
   .social-post .post-date { color: var(--muted); font-size: 0.78rem; margin-top: 8px; }
   .social-post .post-engagement { display: flex; gap: 16px; margin-top: 8px; color: var(--muted); font-size: 0.78rem; }
-
   .newspaper { font-family: var(--font-display); line-height: 1.7; }
   .newspaper .masthead { text-align: center; border-bottom: 3px double var(--ink); padding-bottom: 8px; margin-bottom: 16px; }
   .newspaper .masthead h4 { font-size: 1.4rem; letter-spacing: 2px; text-transform: uppercase; }
@@ -75,7 +61,6 @@
   .newspaper .headline { font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
   .newspaper .byline { font-style: italic; color: var(--muted); font-size: 0.85rem; margin-bottom: 12px; }
   .newspaper .article-body { font-size: 0.92rem; }
-
   .hint-group { margin: 16px 0; }
   .hint-btn { background: var(--accent2); color: white; border: none; padding: 8px 16px; border-radius: var(--radius); cursor: pointer; font-size: 0.85rem; margin: 4px 4px 4px 0; font-family: var(--font-body); transition: all 0.2s; }
   .hint-btn:hover { background: var(--accent); }
@@ -86,7 +71,6 @@
   .hint-content.direction { background: #fef9e7; border-left: 3px solid #f39c12; }
   .hint-content.almost { background: #fde8e8; border-left: 3px solid var(--accent); }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-
   .reveal-btn { background: var(--accent); color: white; border: none; padding: 12px 24px; border-radius: var(--radius); cursor: pointer; font-size: 1rem; font-family: var(--font-body); font-weight: 600; margin: 20px 0; transition: all 0.2s; }
   .reveal-btn:hover { background: #a93226; transform: translateY(-1px); }
   .answer-block { display: none; animation: fadeIn 0.4s; }
@@ -96,18 +80,14 @@
   .answer-card .difficulty.easy { background: #d5f5e3; color: #1e8449; }
   .answer-card .difficulty.medium { background: #fef9e7; color: #b7950b; }
   .answer-card .difficulty.hard { background: #fde8e8; color: var(--accent); }
-
   .worksheet-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
   .worksheet-table th { background: var(--accent2); color: white; padding: 10px; text-align: left; font-size: 0.85rem; }
   .worksheet-table td { padding: 14px 10px; border: 1px solid #d5d0c8; vertical-align: top; min-height: 60px; }
   .worksheet-table tr:nth-child(even) { background: rgba(0,0,0,0.02); }
-
   .facilitator-note { background: #fdf2e9; border: 1px dashed #e67e22; border-radius: var(--radius); padding: 16px; margin: 16px 0; font-size: 0.88rem; }
   .facilitator-note::before { content: '📋 Nota para el facilitador'; display: block; font-weight: 700; color: #e67e22; margin-bottom: 6px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
-
   .timer-bar { background: var(--ink); color: var(--paper); padding: 10px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; font-size: 1.1rem; font-family: var(--font-mono); }
   .timer-bar button { background: var(--accent); color: white; border: none; padding: 6px 14px; border-radius: var(--radius); cursor: pointer; font-family: var(--font-body); font-size: 0.85rem; }
-
   .takeaway-card { max-width: 400px; border: 2px solid var(--ink); border-radius: var(--radius); overflow: hidden; margin: 20px auto; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
   .takeaway-front { background: var(--ink); color: var(--paper); padding: 28px 24px; text-align: center; }
   .takeaway-front h3 { color: var(--accent); font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 12px; }
@@ -117,11 +97,9 @@
   .takeaway-back li { padding: 5px 0; border-bottom: 1px solid #e0dbd2; }
   .takeaway-back li:last-child { border: none; }
   .takeaway-back li::before { content: '⚠ '; }
-
   .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
   @media (max-width: 700px) { .comparison { grid-template-columns: 1fr; } .nav-btns { gap: 4px; } .nav-btn { padding: 4px 8px; font-size: 0.75rem; } }
   .comparison .card { margin: 0; }
-
   .intro-hero { text-align: center; padding: 40px 20px 20px; }
   .intro-hero h2 { font-size: 2.4rem; color: var(--ink); margin-bottom: 4px; }
   .intro-hero .subtitle { font-family: var(--font-display); font-style: italic; color: var(--muted); font-size: 1.1rem; margin-bottom: 24px; }
@@ -135,7 +113,6 @@
   .step-card .step-num { font-size: 1.8rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); }
   .step-card .step-title { font-weight: 600; margin: 6px 0 4px; }
   .step-card .step-time { font-size: 0.8rem; color: var(--muted); }
-
   @media print {
     .topbar, .timer-bar, .nav-btns, .hint-btn, .reveal-btn, .facilitator-note { display: none !important; }
     .section { display: block !important; page-break-after: always; max-width: 100%; padding: 20px; }
@@ -204,11 +181,12 @@
 </div>
 
 <!-- ===== FASE 1: DOSSIER ===== -->
+<!-- ARTEFACT ORDER: Report → Newspaper → Social Media → Org Chart → Leaked Email -->
 <div class="section" id="sec-fase1">
   <h2>Fase 1 — El Dossier del Incidente</h2>
   <p>El Ayuntamiento de <strong>Villarreal de la Sierra</strong> (municipio ficticio, ~18.000 habitantes) sufrió un ataque de ransomware el 14 de noviembre de 2024. Se ha pseudonimizado el informe eliminando los nombres. <strong>Vuestra misión:</strong> usando los artefactos disponibles, intentad identificar a las personas designadas como Empleado/a A, B y C.</p>
 
-  <!-- INFORME (CLEAN — sin highlights) -->
+  <!-- 1. INFORME (CLEAN) -->
   <div class="card report">
     <span class="label-tag report-tag">Informe de Incidente — INC-2024-0347</span>
     <div class="header-block">
@@ -253,76 +231,9 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 — Asegurar que todo el personal de nueva incorporación reciba formación antes de acceder a los sistemas.
   </div>
 
-  <!-- ORGANIGRAMA -->
-  <div class="card orgchart">
-    <span class="label-tag org-tag">Artefacto 1 — Organigrama del Ayuntamiento</span>
-    <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Página web del Ayuntamiento de Villarreal de la Sierra (acceso público)</p>
-    <table class="org-table">
-      <thead><tr><th>Nombre</th><th>Cargo</th><th>Área / Concejalía</th><th>Planta</th></tr></thead>
-      <tbody>
-        <tr><td>Antonio Ruiz Vega</td><td>Alcalde</td><td>Alcaldía</td><td>3ª</td></tr>
-        <tr><td>Carmen Delgado López</td><td>Concejala</td><td>Hacienda y Economía</td><td>2ª</td></tr>
-        <tr><td>Marta Jiménez Solano</td><td>Concejala</td><td>Modernización y Transformación Digital</td><td>2ª</td></tr>
-        <tr><td>Pablo Fernández Ruiz</td><td>Concejal</td><td>Urbanismo y Medio Ambiente</td><td>1ª</td></tr>
-        <tr><td>Lucía Navarro Gil</td><td>Concejala</td><td>Educación y Cultura</td><td>1ª</td></tr>
-        <tr><td>Sergio Molina Torres</td><td>Responsable de Sistemas</td><td>Informática (dep. de Modernización)</td><td>2ª</td></tr>
-        <tr><td>Raquel Vidal Herrera</td><td>Técnica de Sistemas</td><td>Informática (dep. de Modernización)</td><td>2ª</td></tr>
-        <tr><td>Elena Paredes Ruiz</td><td>Administrativa</td><td>Hacienda y Economía</td><td>2ª</td></tr>
-        <tr><td>Javier López Martín</td><td>Administrativo</td><td>Hacienda y Economía</td><td>2ª</td></tr>
-        <tr><td>Ana Belén Romero Cruz</td><td>Administrativa</td><td>Secretaría General</td><td>3ª</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- REDES SOCIALES -->
-  <div class="card social">
-    <span class="label-tag social-tag">Artefacto 2 — Publicaciones en redes sociales</span>
-    <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Perfiles públicos en redes sociales</p>
-
-    <div class="social-post">
-      <div class="post-header">
-        <div class="avatar" style="background:#0077b5;">MJ</div>
-        <div><div class="post-name">Marta Jiménez Solano</div><div class="post-handle">LinkedIn · 2ª conexión</div></div>
-      </div>
-      <div class="post-body">Muy contenta de iniciar esta nueva etapa como concejala en el Ayuntamiento de Villarreal de la Sierra. Después de 16 años en el sector de ciberseguridad y consultoría tecnológica, asumo este reto con ilusión y responsabilidad. ¡La transformación digital de nuestros municipios es más necesaria que nunca! 💪🏛️ #GobiernoDigital #Ciberseguridad</div>
-      <div class="post-date">12 de junio de 2023</div>
-      <div class="post-engagement">❤️ 134 · 💬 28 comentarios · 🔄 12 compartidos</div>
-    </div>
-
-    <div class="social-post">
-      <div class="post-header">
-        <div class="avatar" style="background:#1da1f2;">PF</div>
-        <div><div class="post-name">Pablo Fernández Ruiz</div><div class="post-handle">@paboruiz · X</div></div>
-      </div>
-      <div class="post-body">Menudo lío hoy en el Ayuntamiento 🤦‍♂️ Los ordenadores no funcionan y no nos dicen nada. Yo solo quiero tramitar mis licencias de obras tranquilo.</div>
-      <div class="post-date">14 de noviembre de 2024</div>
-      <div class="post-engagement">❤️ 8 · 💬 3 · 🔄 1</div>
-    </div>
-
-    <div class="social-post">
-      <div class="post-header">
-        <div class="avatar" style="background:#4267B2;">EP</div>
-        <div><div class="post-name">Elena Paredes Ruiz</div><div class="post-handle">Facebook · Grupo "Villarreal de la Sierra — Vecinos"</div></div>
-      </div>
-      <div class="post-body">¡Por fin puedo decirlo! Acabo de aprobar las oposiciones y en septiembre empiezo a trabajar en el Ayuntamiento 🎉🎉🎉 ¡¡Funcionaria!! Después de 3 años preparándome, no me lo creo. Gracias a todos los que me habéis apoyado. ¡Nos vemos en Hacienda! 😄</div>
-      <div class="post-date">28 de agosto de 2024</div>
-      <div class="post-engagement">❤️ 243 · 💬 67 comentarios</div>
-    </div>
-
-    <div class="social-post">
-      <div class="post-header">
-        <div class="avatar" style="background:#e1306c;">RV</div>
-        <div><div class="post-name">raquelvh_tech</div><div class="post-handle">Instagram</div></div>
-      </div>
-      <div class="post-body">Viernes de formación en Madrid 📚 Curso de seguridad en la nube con el equipo de @INCIBE. Se aprende mucho pero echo de menos el pueblo 😅 #Ciberseguridad #FormaciónContinua #SysAdmin</div>
-      <div class="post-date">8 de noviembre de 2024</div>
-      <div class="post-engagement">❤️ 45 · 💬 6</div>
-    </div>
-  </div>
-
-  <!-- NOTICIA -->
+  <!-- 2. NOTICIA -->
   <div class="card news">
-    <span class="label-tag news-tag">Artefacto 3 — Recorte de prensa</span>
+    <span class="label-tag news-tag">Artefacto 1 — Recorte de prensa</span>
     <div class="newspaper">
       <div class="masthead"><h4>El Diario de Villarreal</h4><div class="date">Jueves, 7 de noviembre de 2024 — Edición digital</div></div>
       <div class="headline">El alcalde inaugura la nueva biblioteca municipal el próximo jueves 14 de noviembre</div>
@@ -335,21 +246,104 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     </div>
   </div>
 
-  <!-- CORREO INTERNO -->
+  <!-- 3. REDES SOCIALES -->
+  <div class="card social">
+    <span class="label-tag social-tag">Artefacto 2 — Publicaciones en redes sociales</span>
+    <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Perfiles públicos en redes sociales</p>
+
+    <!-- Marta - LinkedIn -->
+    <div class="social-post">
+      <div class="post-header">
+        <div class="avatar" style="background:#0077b5;">MJ</div>
+        <div><div class="post-name">Marta Jiménez Solano</div><div class="post-handle">LinkedIn · 2ª conexión</div></div>
+      </div>
+      <div class="post-body">Muy contenta de iniciar esta nueva etapa como concejala en el Ayuntamiento de Villarreal de la Sierra. Después de 16 años en el sector de ciberseguridad y consultoría tecnológica, asumo este reto con ilusión y responsabilidad. ¡La transformación digital de nuestros municipios es más necesaria que nunca! 💪🏛️ #GobiernoDigital #Ciberseguridad</div>
+      <div class="post-date">12 de junio de 2023</div>
+      <div class="post-engagement">❤️ 134 · 💬 28 comentarios · 🔄 12 compartidos</div>
+    </div>
+
+    <!-- Pablo - X/Twitter (RED HERRING — portfolio overlap) -->
+    <div class="social-post">
+      <div class="post-header">
+        <div class="avatar" style="background:#1da1f2;">PF</div>
+        <div><div class="post-name">Pablo Fernández Ruiz</div><div class="post-handle">@paboruiz · X</div></div>
+      </div>
+      <div class="post-body">Menudo lío hoy en el Ayuntamiento 🤦‍♂️ Los ordenadores no funcionan y no nos dicen nada. Yo solo quiero tramitar mis licencias de obras tranquilo.</div>
+      <div class="post-date">14 de noviembre de 2024</div>
+      <div class="post-engagement">❤️ 8 · 💬 3 · 🔄 1</div>
+    </div>
+
+    <!-- Elena - Facebook (NO MENTION OF HACIENDA) -->
+    <div class="social-post">
+      <div class="post-header">
+        <div class="avatar" style="background:#4267B2;">EP</div>
+        <div><div class="post-name">Elena Paredes Ruiz</div><div class="post-handle">Facebook · Grupo "Villarreal de la Sierra — Vecinos"</div></div>
+      </div>
+      <div class="post-body">¡Por fin puedo decirlo! Acabo de aprobar las oposiciones y en septiembre empiezo a trabajar en el Ayuntamiento 🎉🎉🎉 ¡¡Funcionaria!! Después de 3 años preparándome, no me lo creo. Gracias a todos los que me habéis apoyado. ¡Nos vemos en el Ayuntamiento! 😄</div>
+      <div class="post-date">28 de agosto de 2024</div>
+      <div class="post-engagement">❤️ 243 · 💬 67 comentarios</div>
+    </div>
+
+    <!-- Javier - LinkedIn (ELIMINATES HIM — 5 year anniversary) -->
+    <div class="social-post">
+      <div class="post-header">
+        <div class="avatar" style="background:#0077b5;">JL</div>
+        <div><div class="post-name">Javier López Martín</div><div class="post-handle">LinkedIn · 3ª conexión</div></div>
+      </div>
+      <div class="post-body">5 años ya en el Ayuntamiento de Villarreal de la Sierra. Empecé como interino y hoy soy parte del equipo fijo de Hacienda. Parece mentira lo rápido que pasa el tiempo. Agradecido al equipo y a Carmen por la confianza. ¡A por otros 5! 💼</div>
+      <div class="post-date">15 de octubre de 2024</div>
+      <div class="post-engagement">❤️ 87 · 💬 14 comentarios</div>
+    </div>
+
+    <!-- Raquel - Instagram (RED HERRING) -->
+    <div class="social-post">
+      <div class="post-header">
+        <div class="avatar" style="background:#e1306c;">RV</div>
+        <div><div class="post-name">raquelvh_tech</div><div class="post-handle">Instagram</div></div>
+      </div>
+      <div class="post-body">Viernes de formación en Madrid 📚 Curso de seguridad en la nube con el equipo de @INCIBE. Se aprende mucho pero echo de menos el pueblo 😅 #Ciberseguridad #FormaciónContinua #SysAdmin</div>
+      <div class="post-date">8 de noviembre de 2024</div>
+      <div class="post-engagement">❤️ 45 · 💬 6</div>
+    </div>
+  </div>
+
+  <!-- 4. ORGANIGRAMA (with Daniel + Pablo's expanded portfolio) -->
+  <div class="card orgchart">
+    <span class="label-tag org-tag">Artefacto 3 — Organigrama del Ayuntamiento</span>
+    <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Página web del Ayuntamiento de Villarreal de la Sierra (acceso público)</p>
+    <table class="org-table">
+      <thead><tr><th>Nombre</th><th>Cargo</th><th>Área / Concejalía</th><th>Planta</th></tr></thead>
+      <tbody>
+        <tr><td>Antonio Ruiz Vega</td><td>Alcalde</td><td>Alcaldía</td><td>3ª</td></tr>
+        <tr><td>Carmen Delgado López</td><td>Concejala</td><td>Hacienda y Economía</td><td>2ª</td></tr>
+        <tr><td>Marta Jiménez Solano</td><td>Concejala</td><td>Modernización y Transformación Digital</td><td>2ª</td></tr>
+        <tr><td>Pablo Fernández Ruiz</td><td>Concejal</td><td>Urbanismo, Medio Ambiente e Innovación</td><td>1ª</td></tr>
+        <tr><td>Lucía Navarro Gil</td><td>Concejala</td><td>Educación y Cultura</td><td>1ª</td></tr>
+        <tr><td>Sergio Molina Torres</td><td>Responsable de Sistemas</td><td>Informática (dep. de Modernización)</td><td>2ª</td></tr>
+        <tr><td>Raquel Vidal Herrera</td><td>Técnica de Sistemas</td><td>Informática (dep. de Modernización)</td><td>2ª</td></tr>
+        <tr><td>Daniel García Mora</td><td>Técnico en Prácticas</td><td>Informática (dep. de Modernización)</td><td>2ª</td></tr>
+        <tr><td>Elena Paredes Ruiz</td><td>Administrativa</td><td>Hacienda y Economía</td><td>2ª</td></tr>
+        <tr><td>Javier López Martín</td><td>Administrativo</td><td>Hacienda y Economía</td><td>2ª</td></tr>
+        <tr><td>Ana Belén Romero Cruz</td><td>Administrativa</td><td>Secretaría General</td><td>3ª</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. CORREO INTERNO -->
   <div class="card email">
     <span class="label-tag email-tag">Artefacto 4 — Correo interno filtrado</span>
-    <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Este correo fue encontrado entre los datos robados durante el ataque de ransomware. Los atacantes publicaron parte de los datos extraídos en un foro de ciberseguridad, incluyendo correos internos del servidor de Hacienda/RRHH, cuya unidad de red compartida fue cifrada.</p>
+    <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Este correo fue encontrado entre los datos robados durante el ataque de ransomware. Los atacantes extrajeron datos de la unidad de red compartida de Hacienda/RRHH antes de cifrarla, y publicaron una selección de correos internos en un foro de ciberseguridad como prueba del ataque (táctica habitual en ransomware de doble extorsión).</p>
     <div style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; background: #f9f9f9; padding: 16px; border-radius: 4px;">
       <strong>De:</strong> sergio.molina@villarrealdelasierra.es<br>
       <strong>Para:</strong> rrhh@villarrealdelasierra.es<br>
-      <strong>CC:</strong> marta.jimenez@villarrealdelasierra.es<br>
       <strong>Fecha:</strong> 2 de octubre de 2024, 10:14<br>
       <strong>Asunto:</strong> RE: Horarios equipo informática — Cuarto trimestre<br><br>
       Buenos días,<br><br>
       Os confirmo los horarios del equipo de informática para el cuarto trimestre:<br><br>
       — <strong>Sergio Molina Torres</strong> (Responsable): Entrada 07:45 - Salida 15:15<br>
-      — <strong>Raquel Vidal Herrera</strong> (Técnica): Entrada 09:00 - Salida 16:30<br><br>
-      Raquel estará de formación presencial en Madrid del 4 al 8 de noviembre (curso INCIBE). Durante esa semana seré la única persona del equipo disponible antes de las 9:00.<br><br>
+      — <strong>Raquel Vidal Herrera</strong> (Técnica): Entrada 09:00 - Salida 16:30<br>
+      — <strong>Daniel García Mora</strong> (Prácticas): Entrada 09:00 - Salida 14:00 (jornada reducida, lunes a jueves)<br><br>
+      Raquel estará de formación presencial en Madrid del 4 al 8 de noviembre (curso INCIBE). Daniel no trabaja los viernes.<br><br>
       Un saludo,<br>
       Sergio Molina Torres<br>
       Responsable de Sistemas Informáticos
@@ -382,14 +376,14 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
   <h2>Sistema de Pistas</h2>
   <p>Si un grupo se atasca, revelar las pistas por niveles.</p>
 
-  <h3>Empleado/a C — Nivel fácil</h3>
+  <h3>Empleado/a C — Nivel medio-fácil</h3>
   <div class="hint-group">
     <button class="hint-btn" onclick="revealHint(this, 'hintC1')">💡 Empujoncito</button>
     <button class="hint-btn" onclick="revealHint(this, 'hintC2')">🧭 Dirección</button>
     <button class="hint-btn" onclick="revealHint(this, 'hintC3')">🎯 Casi-casi</button>
-    <div class="hint-content nudge" id="hintC1">Fijaos en el cargo descrito en el informe para Empleado/a C. ¿Qué área gestiona?</div>
-    <div class="hint-content direction" id="hintC2">Buscad en el organigrama quién es responsable del área de «Modernización y Transformación Digital». Luego comparad con LinkedIn.</div>
-    <div class="hint-content almost" id="hintC3">Solo hay una concejala de Modernización y Transformación Digital. El perfil de LinkedIn menciona 16 años en ciberseguridad; el informe dice «más de 15 años en el sector tecnológico».</div>
+    <div class="hint-content nudge" id="hintC1">Fijaos en el cargo descrito en el informe para Empleado/a C. ¿Qué área gestiona? Cuidado: hay más de una concejalía con alguna relación con la tecnología.</div>
+    <div class="hint-content direction" id="hintC2">El informe dice «la concejala» (en femenino) responsable de «Modernización y Transformación Digital». En el organigrama hay un concejal de «Urbanismo, Medio Ambiente e Innovación» (Pablo) y una concejala de «Modernización y Transformación Digital» (Marta). Fijaos en el género y en el nombre exacto del área.</div>
+    <div class="hint-content almost" id="hintC3">«La concejala» descarta a Pablo (concejal, masculino). El área del informe coincide exactamente con la de Marta Jiménez Solano. Su perfil de LinkedIn confirma 16 años en ciberseguridad, y el informe dice «más de 15 años en el sector tecnológico». La «Innovación» del área de Pablo es una cortina de humo.</div>
   </div>
 
   <h3>Empleado/a A — Nivel medio</h3>
@@ -397,9 +391,9 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <button class="hint-btn" onclick="revealHint(this, 'hintA1')">💡 Empujoncito</button>
     <button class="hint-btn" onclick="revealHint(this, 'hintA2')">🧭 Dirección</button>
     <button class="hint-btn" onclick="revealHint(this, 'hintA3')">🎯 Casi-casi</button>
-    <div class="hint-content nudge" id="hintA1">El informe menciona que Empleado/a A trabaja en la segunda planta. ¿Cuántas personas de informática trabajan ahí?</div>
-    <div class="hint-content direction" id="hintA2">El informe dice que era la primera persona en conectarse, antes de las 08:30. Cruzad esto con el correo interno sobre horarios.</div>
-    <div class="hint-content almost" id="hintA3">Hay dos personas en informática. El correo interno (de octubre) confirma los horarios fijos del cuarto trimestre: Sergio entra a las 07:45, Raquel a las 09:00. El informe dice «la única persona del equipo que entra antes de las 08:30». Además, el cargo es «responsable de sistemas» — coincide con Sergio Molina Torres. (Nota: aunque Raquel volvió de Madrid el 8 de noviembre, su horario habitual es las 09:00, así que de todos modos no habría sido la primera en conectarse.)</div>
+    <div class="hint-content nudge" id="hintA1">El informe menciona que Empleado/a A trabaja en la segunda planta y es responsable de sistemas. ¿Cuántas personas de informática trabajan ahí?</div>
+    <div class="hint-content direction" id="hintA2">Hay tres personas en informática: Sergio, Raquel y Daniel. El informe dice que Empleado/a A entra antes de las 08:30 y es «la única persona del equipo» que lo hace. Buscad el correo filtrado para contrastar horarios.</div>
+    <div class="hint-content almost" id="hintA3">El correo interno confirma los horarios del Q4: Sergio entra a las 07:45, Raquel a las 09:00, Daniel a las 09:00 (y solo lunes a jueves). El 14 de noviembre es jueves, así que Daniel podría estar, pero entra a las 09:00. Solo Sergio entra antes de las 08:30. Además, su cargo es «responsable de sistemas», que coincide. Es Sergio Molina Torres.</div>
   </div>
 
   <h3>Empleado/a B — Nivel difícil</h3>
@@ -408,8 +402,8 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <button class="hint-btn" onclick="revealHint(this, 'hintB2')">🧭 Dirección</button>
     <button class="hint-btn" onclick="revealHint(this, 'hintB3')">🎯 Casi-casi</button>
     <div class="hint-content nudge" id="hintB1">El informe dice que Empleado/a B trabaja en Hacienda y es de reciente incorporación. ¿Cuántas personas de Hacienda veis en el organigrama?</div>
-    <div class="hint-content direction" id="hintB2">Hay tres personas en Hacienda: una concejala y dos administrativos. ¿Quién podría llevar «menos de tres meses» en el puesto? Mirad las redes sociales.</div>
-    <div class="hint-content almost" id="hintB3">Elena Paredes Ruiz publicó en agosto de 2024 que aprobó las oposiciones y empezaría en septiembre «en Hacienda». Si empezó en septiembre y el incidente fue en noviembre, lleva menos de tres meses — cuadra. Javier López no tiene actividad reciente en redes. Carmen Delgado es la concejala, no personal administrativo. Cuidado: el tuit de Pablo sobre «menudo lío» parece relevante pero Pablo es de Urbanismo.</div>
+    <div class="hint-content direction" id="hintB2">Hay tres personas en Hacienda: Carmen (concejala), Elena y Javier (ambos administrativos). El informe dice «personal administrativo», así que Carmen queda descartada. ¿Quién de los dos podría llevar «menos de tres meses» en noviembre de 2024? Mirad las redes sociales de ambos.</div>
+    <div class="hint-content almost" id="hintB3">Javier publicó en LinkedIn en octubre de 2024 que cumplía 5 años en el Ayuntamiento — no es un recién llegado. Elena publicó en Facebook en agosto de 2024 que aprobó las oposiciones y empezaría en septiembre. Si empezó en septiembre y el incidente fue en noviembre, lleva menos de tres meses. Es Elena Paredes Ruiz. Cuidado: el tuit de Pablo sobre «menudo lío» es una cortina de humo — es de Urbanismo.</div>
   </div>
 </div>
 
@@ -421,31 +415,32 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
   <div class="answer-block" id="answer-block">
     <div class="answer-card">
-      <span class="difficulty easy">Fácil</span>
+      <span class="difficulty easy">Medio-fácil</span>
       <h3 style="margin-top:4px;">Empleado/a C = Marta Jiménez Solano</h3>
-      <p><strong>Cuasi-identificadores:</strong> «concejala responsable del área de Modernización y Transformación Digital» + «más de 15 años de experiencia en el sector tecnológico».</p>
-      <p><strong>Artefactos:</strong> Organigrama (cargo único) + LinkedIn (confirma los 16 años en ciberseguridad).</p>
-      <p><strong>Tipo de ataque:</strong> Un solo cuasi-identificador (cargo) ya es suficiente. LinkedIn simplemente confirma.</p>
+      <p><strong>Cuasi-identificadores:</strong> «la concejala responsable del área de Modernización y Transformación Digital» + «más de 15 años en el sector tecnológico».</p>
+      <p><strong>Artefactos:</strong> Organigrama (dos concejalías con relación tecnológica, pero el nombre exacto del área y el género resuelven la ambigüedad) + LinkedIn (confirma 16 años en ciberseguridad).</p>
+      <p><strong>Trampa superada:</strong> Pablo Fernández tiene «Innovación» en su portfolio, lo que puede confundir inicialmente. Pero el informe dice «Modernización y Transformación Digital» (el área exacta de Marta) y usa «la concejala» (femenino), lo que descarta a Pablo.</p>
     </div>
     <div class="answer-card">
       <span class="difficulty medium">Medio</span>
       <h3 style="margin-top:4px;">Empleado/a A = Sergio Molina Torres</h3>
       <p><strong>Cuasi-identificadores:</strong> «responsable de sistemas informáticos» + «segunda planta» + «única persona del equipo que entra antes de las 08:30».</p>
-      <p><strong>Artefactos:</strong> Organigrama (dos personas en informática, ambas en 2ª planta) + Correo interno filtrado (horarios del Q4: Sergio 07:45, Raquel 09:00).</p>
-      <p><strong>Tipo de ataque:</strong> Se necesitan dos artefactos cruzados. El organigrama solo da dos candidatos; el correo resuelve la ambigüedad. Nota: aunque la formación de Raquel en Madrid terminó el 8 de noviembre, su horario habitual de las 09:00 ya la descarta como «la persona que entra antes de las 08:30».</p>
+      <p><strong>Artefactos:</strong> Organigrama (tres personas en informática: Sergio, Raquel, Daniel, todas en 2ª planta) + Correo filtrado (horarios Q4: Sergio 07:45, Raquel 09:00, Daniel 09:00 lunes-jueves).</p>
+      <p><strong>Trampa superada:</strong> Daniel García Mora (técnico en prácticas) es un tercer candidato que los grupos deben descartar. Aunque Daniel podría estar presente el 14/11 (jueves), su horario de entrada es 09:00, no antes de las 08:30. Además, Raquel ya había vuelto de su formación en Madrid (que terminó el 8/11), pero su horario habitual de las 09:00 también la descarta.</p>
     </div>
     <div class="answer-card">
       <span class="difficulty hard">Difícil</span>
       <h3 style="margin-top:4px;">Empleado/a B = Elena Paredes Ruiz</h3>
       <p><strong>Cuasi-identificadores:</strong> «personal administrativo de Hacienda» + «reciente incorporación» + «menos de tres meses en el puesto».</p>
-      <p><strong>Artefactos:</strong> Organigrama (tres personas en Hacienda, pero Carmen es concejala → quedan Elena y Javier) + Facebook (Elena publicó en agosto 2024 que empezaría en Hacienda en septiembre → lleva menos de tres meses en noviembre).</p>
-      <p><strong>Cortinas de humo descartadas:</strong></p>
-      <p>— El tuit de Pablo Fernández sobre «menudo lío» parece relevante pero Pablo es concejal de Urbanismo, no de Hacienda.</p>
-      <p>— El post de Instagram de Raquel Vidal sobre formación en Madrid es contextualmente interesante (explica su ausencia) pero no ayuda a identificar a B.</p>
+      <p><strong>Artefactos:</strong> Organigrama (tres personas en Hacienda: Carmen es concejala → quedan Elena y Javier) + LinkedIn de Javier (5 años en el Ayuntamiento → no es recién llegado) + Facebook de Elena (aprobó oposiciones en agosto, empezó en septiembre → menos de 3 meses en noviembre).</p>
+      <p><strong>Razonamiento completo:</strong> Elena no menciona «Hacienda» en su post — solo dice «el Ayuntamiento». Los grupos necesitan: 1) saber que B está en Hacienda (del informe), 2) ver en el organigrama que Elena está en Hacienda, 3) descartar a Javier (LinkedIn: 5 años), 4) confirmar que Elena es de reciente incorporación (Facebook: septiembre 2024).</p>
+      <p><strong>Cortinas de humo:</strong></p>
+      <p>— El tuit de Pablo sobre «menudo lío» parece relevante pero es de Urbanismo.</p>
+      <p>— El post de Raquel sobre formación en Madrid es contextualmente interesante pero no ayuda con Employee B.</p>
     </div>
 
     <h3>Informe anotado — Cuasi-identificadores señalados</h3>
-    <p><em>Esta versión muestra los cuasi-identificadores que permitieron la re-identificación. Solo para el facilitador / la puesta en común.</em></p>
+    <p><em>Solo para el facilitador / la puesta en común. NO distribuir a los participantes.</em></p>
     <div class="card report" style="font-size:0.84rem;">
       <span class="label-tag report-tag">Versión anotada del informe</span>
 
@@ -453,7 +448,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
 08:31h — Empleado/a B, personal administrativo de <span class="qi">la Concejalía de Hacienda</span>, abrió un correo electrónico malicioso. Empleado/a B era <span class="qi">personal de reciente incorporación</span> y no había recibido aún la formación en ciberseguridad.
 
-09:02h — Empleado/a C, <span class="qi">la concejala responsable del área de Modernización y Transformación Digital</span>, con <span class="qi">más de 15 años de experiencia en el sector tecnológico</span> antes de dedicarse a la política municipal, recibió la primera alerta.
+09:02h — Empleado/a C, <span class="qi">la concejala responsable del área de Modernización y Transformación Digital</span>, con <span class="qi">más de 15 años de experiencia en el sector tecnológico</span>, recibió la primera alerta.
 
 09:30h — Empleado/a C inició el contacto con un equipo externo de respuesta, ya que el alcalde no estaba disponible al encontrarse en <span class="qi">la inauguración de la nueva biblioteca municipal</span>.
 
@@ -464,7 +459,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
     <h3>Lista completa de cuasi-identificadores</h3>
     <div class="card" style="border-left: 4px solid var(--accent);">
-      <p>Puesto de trabajo · Departamento/Concejalía · Planta del edificio · Horario de entrada · Antigüedad en el puesto · Experiencia profesional previa · Nivel de responsabilidad · Estado emocional posterior al incidente · Referencia a la ubicación del alcalde</p>
+      <p>Puesto de trabajo · Departamento/Concejalía · Planta del edificio · Horario de entrada · Antigüedad en el puesto · Experiencia profesional previa · Nivel de responsabilidad · Género gramatical («la concejala») · Estado emocional posterior al incidente · Referencia a la ubicación del alcalde</p>
     </div>
   </div>
 </div>
@@ -507,10 +502,10 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
   <div class="card" style="border-left: 4px solid var(--green); margin-top: 24px;">
     <h3 style="color: var(--green); margin-top: 0;">¿Qué ha cambiado?</h3>
-    <p><strong>Generalización:</strong> «Concejalía de Hacienda» → «un área administrativa». «Responsable de sistemas informáticos» → «empleado/a del área técnica».</p>
-    <p><strong>Supresión:</strong> Se eliminan detalles como la planta, el horario exacto, los años de experiencia, y la referencia a la inauguración de la biblioteca.</p>
+    <p><strong>Generalización:</strong> «Concejalía de Hacienda» → «un área administrativa». «Responsable de sistemas informáticos» → «empleado/a del área técnica». «La concejala» → «un/a responsable político/a».</p>
+    <p><strong>Supresión:</strong> Se eliminan detalles como la planta, el horario exacto, los años de experiencia, el género gramatical específico, y la referencia a la inauguración de la biblioteca.</p>
     <p><strong>Desvinculación:</strong> Se rompe la conexión entre el rol y los detalles temporales o geográficos que permitían cruzar con fuentes externas.</p>
-    <p>El informe sigue siendo <strong>útil</strong> para aprender del incidente (vector de ataque, cronología general, recomendaciones), pero ya no permite identificar a las personas implicadas.</p>
+    <p>El informe sigue siendo <strong>útil</strong> para aprender del incidente, pero ya no permite identificar a las personas implicadas.</p>
   </div>
 </div>
 
@@ -531,10 +526,11 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <p>En este taller, las redes sociales fueron clave para confirmar identidades. Cada publicación que hacemos añade piezas al rompecabezas:</p>
     <p>«¡Acabo de aprobar las oposiciones!» → Fecha de incorporación.<br>
     «Nueva etapa como concejala» → Cargo exacto + experiencia previa.<br>
+    «5 años ya en el Ayuntamiento» → Antigüedad, descarta que seas un recién llegado.<br>
     «Viernes de formación en Madrid» → Presencia/ausencia en fechas concretas.<br>
     <strong>«Carrera de 10km por el centro» (Strava) → Ubicación del trabajo + rutina diaria.</strong></p>
     <p>Individualmente parecen inofensivas. Combinadas con un informe mal anonimizado, <strong>son suficientes para identificaros</strong>.</p>
-    <p><em>Los guardaespaldas suecos no compartieron sus nombres, ni sus cargos, ni sus misiones. Compartieron rutas de running. Eso fue suficiente.</em></p>
+    <p><em>Los guardaespaldas suecos no compartieron nada sobre sus misiones. Compartieron rutas de running. Eso fue suficiente.</em></p>
   </div>
 
   <h3>Tarjeta para llevar a casa</h3>
@@ -552,6 +548,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
         <li>Horario de trabajo</li>
         <li>Fecha de incorporación</li>
         <li>Experiencia profesional previa</li>
+        <li>Género gramatical en el texto</li>
         <li>Publicaciones en redes sociales (LinkedIn, Strava, Facebook, X...)</li>
       </ul>
       <p style="font-weight:600; margin-top:12px; font-size:0.82rem; text-align:center;">Taller «Jugando a ser Detective» — Anonimización de ciberincidentes</p>
@@ -566,65 +563,69 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
   <h3>Preparación previa</h3>
   <div class="card">
-    <p><strong>Materiales necesarios:</strong></p>
-    <p>— Imprimir el dossier (Fase 1) y la hoja de trabajo para cada grupo (3–5 personas). IMPORTANTE: imprimir la versión <strong>sin anotaciones</strong> — los cuasi-identificadores NO deben estar señalados en las copias de los participantes.</p>
-    <p>— Opcional: rotuladores de colores para que marquen los cuasi-identificadores que vayan descubriendo.</p>
-    <p>— Pizarra o papel grande para la puesta en común.</p>
-    <p>— Tarjetas de conclusión impresas.</p>
+    <p><strong>Materiales:</strong> Imprimir el dossier (Fase 1) y la hoja de trabajo para cada grupo (3–5 personas). IMPORTANTE: imprimir la versión <strong>sin anotaciones</strong>. Opcional: rotuladores de colores. Pizarra o papel grande para la puesta en común. Tarjetas de conclusión impresas.</p>
   </div>
 
   <h3>Guión minuto a minuto</h3>
   <div class="card">
     <p><strong>0:00 – 0:05 | Introducción</strong></p>
-    <p>Proyectar la sección «Inicio». Contar brevemente el caso Strava: «En julio de 2025, siete guardaespaldas del Primer Ministro de Suecia subieron sus rutas de running a Strava. Los periodistas analizaron 1.400 entrenamientos y descubrieron la dirección privada del Primer Ministro, reuniones secretas y vacaciones de la Familia Real. Los guardaespaldas no compartieron nada sobre sus misiones — solo rutas de correr. Pero dónde y cuándo corrían fue suficiente.» Explicar qué es un cuasi-identificador: «Si digo 'la única mujer del departamento de informática que empezó en septiembre', ¿necesito decir su nombre?»</p>
+    <p>Proyectar «Inicio». Contar el caso Strava: «En julio de 2025, siete guardaespaldas del Primer Ministro de Suecia subieron sus rutas de running a Strava. Los periodistas analizaron 1.400 entrenamientos y descubrieron la dirección privada del Primer Ministro, reuniones secretas y vacaciones de la Familia Real. Los guardaespaldas no compartieron nada sobre sus misiones — solo rutas de correr. Pero dónde y cuándo corrían fue suficiente.» Explicar cuasi-identificadores: «Si digo 'la única mujer del departamento de informática que empezó en septiembre', ¿necesito decir su nombre?»</p>
 
     <p style="margin-top:16px;"><strong>0:05 – 0:07 | Reparto y explicación</strong></p>
-    <p>Repartir los dossiers impresos y las hojas de trabajo. Explicar la misión: «Tenéis un informe donde los nombres se han sustituido por códigos. Usando los artefactos, intentad descubrir quién es quién.» Poner el temporizador de 10 minutos.</p>
+    <p>Repartir dossiers y hojas de trabajo. Explicar la misión. Poner temporizador de 10 minutos.</p>
 
     <p style="margin-top:16px;"><strong>0:07 – 0:19 | Fase 1: Trabajo en grupo</strong></p>
-    <p>Circular entre los grupos. Si un grupo se atasca pasados 4–5 minutos, ofrecer la primera pista (empujoncito). A los 8 minutos, si algún grupo no ha identificado a nadie, ofrecer la segunda pista. El objetivo es que todos identifiquen al menos a Empleado/a C.</p>
+    <p>Circular entre grupos. Esperar 4–5 minutos antes de ofrecer pistas. Objetivo: que todos identifiquen al menos a una persona. Con las nuevas dificultades (Daniel, Pablo/Innovación, Javier), esperar que los grupos necesiten más tiempo que antes.</p>
 
     <p style="margin-top:16px;"><strong>0:19 – 0:24 | Puesta en común</strong></p>
-    <p>Preguntar a los grupos: ¿A quién habéis identificado? ¿Cómo? Ir apuntando los cuasi-identificadores en la pizarra. Preguntar: ¿Habéis caído en alguna cortina de humo? Momento clave: cuando la lista crezca, mostrar el informe anotado (sección Respuestas) y señalar que el informe «solo» eliminaba nombres.</p>
+    <p>Preguntar: ¿A quién habéis identificado? ¿Cómo? Apuntar cuasi-identificadores en la pizarra. Momento clave: preguntar si alguien pensó que Pablo era Empleado/a C — discutir el género gramatical como cuasi-identificador. Si algún grupo se confundió con Daniel para Empleado/a A, discutir cómo los horarios descartaron candidatos.</p>
 
     <p style="margin-top:16px;"><strong>0:24 – 0:28 | Fase 2: Comparación</strong></p>
-    <p>Proyectar la sección «Fase 2». Mostrar las comparaciones lado a lado. Preguntar: ¿Podríais identificar a alguien ahora? Explicar brevemente generalización, supresión y desvinculación.</p>
+    <p>Proyectar «Fase 2». Mostrar comparaciones lado a lado. Señalar que la versión anonimizada también neutraliza el género gramatical («un/a responsable político/a»).</p>
 
     <p style="margin-top:16px;"><strong>0:28 – 0:33 | Conclusión</strong></p>
-    <p>Proyectar «Conclusión». Leer la frase clave en voz alta. Hacer la reflexión personal (15 segundos de silencio). Luego el bloque sobre redes sociales — conectar de vuelta con Strava. Repartir las tarjetas.</p>
+    <p>Leer frase clave. Reflexión personal (15 segundos). Bloque redes sociales — conectar con Strava. Repartir tarjetas.</p>
   </div>
 
   <h3>Preguntas frecuentes del público</h3>
   <div class="card">
     <p><strong>«¿Cómo tienen los atacantes ese correo interno?»</strong></p>
-    <p>El correo fue encontrado entre los datos robados durante el ataque de ransomware. Los atacantes cifraron la unidad de red compartida de Hacienda/RRHH, pero antes de cifrar, extrajeron datos y los publicaron en un foro de ciberseguridad como prueba del ataque (una táctica habitual en ransomware de doble extorsión). Entre esos datos estaban correos internos del servidor de correo, incluyendo este sobre horarios.</p>
+    <p>El correo estaba en la unidad de red compartida de Hacienda/RRHH. Los atacantes extrajeron datos antes de cifrar (doble extorsión) y los publicaron en un foro como prueba del ataque.</p>
 
-    <p style="margin-top:12px;"><strong>«Raquel volvió de Madrid el 8 de noviembre. ¿No podría haber sido ella la Empleado/a A el 14?»</strong></p>
-    <p>Buena observación. Sí, Raquel ya había vuelto de la formación. Pero el correo interno de octubre confirma los horarios fijos del cuarto trimestre: Raquel entra a las 09:00 y Sergio a las 07:45. El informe dice que Empleado/a A «es la única persona del equipo que entra antes de las 08:30» — esto se describe como habitual, no excepcional. Raquel, con su horario de 09:00, no encaja.</p>
+    <p style="margin-top:12px;"><strong>«Raquel volvió de Madrid el 8 de noviembre. ¿No podría ser Empleado/a A el 14?»</strong></p>
+    <p>Su horario habitual es 09:00 (confirmado en el correo de octubre). El informe describe a Empleado/a A como «la única persona que entra antes de las 08:30» de forma habitual. Raquel no encaja.</p>
 
-    <p style="margin-top:12px;"><strong>«¿La concejala puede contratar a un equipo externo por su cuenta?»</strong></p>
-    <p>En el contexto de una emergencia de ciberseguridad, una concejala con competencias delegadas en el área de tecnología puede activar un protocolo de respuesta e iniciar el contacto con proveedores de emergencia. El informe no dice que firmara un contrato — dice que «inició el contacto», lo cual es operativamente razonable.</p>
+    <p style="margin-top:12px;"><strong>«Daniel trabaja los jueves y el 14 era jueves. ¿No podría ser Empleado/a A?»</strong></p>
+    <p>Daniel entra a las 09:00, no antes de las 08:30. Además, es técnico en prácticas, no «responsable de sistemas».</p>
+
+    <p style="margin-top:12px;"><strong>«Pablo tiene 'Innovación' en su concejalía. ¿No podría ser Empleado/a C?»</strong></p>
+    <p>El informe dice «la concejala» (femenino) y el nombre exacto del área es «Modernización y Transformación Digital», no «Innovación». Pablo es concejal (masculino) de «Urbanismo, Medio Ambiente e Innovación». El solapamiento temático es intencionado como cortina de humo.</p>
+
+    <p style="margin-top:12px;"><strong>«¿La concejala puede contratar un equipo externo?»</strong></p>
+    <p>El informe dice «inició el contacto» — no que firmara un contrato. Operativamente razonable en una emergencia con competencias delegadas.</p>
   </div>
 
   <h3>Respuestas rápidas</h3>
   <div class="card">
-    <p><strong>Empleado/a C = Marta Jiménez Solano</strong> (fácil) — Cargo único en organigrama.</p>
-    <p><strong>Empleado/a A = Sergio Molina Torres</strong> (medio) — Cruce organigrama + correo horarios.</p>
-    <p><strong>Empleado/a B = Elena Paredes Ruiz</strong> (difícil) — Cruce organigrama + Facebook + eliminar concejala.</p>
+    <p><strong>Empleado/a C = Marta Jiménez Solano</strong> (medio-fácil) — Nombre exacto del área + género + LinkedIn.</p>
+    <p><strong>Empleado/a A = Sergio Molina Torres</strong> (medio) — Organigrama (3 IT) + correo horarios → único antes de 08:30.</p>
+    <p><strong>Empleado/a B = Elena Paredes Ruiz</strong> (difícil) — Organigrama + LinkedIn Javier (5 años) + Facebook Elena (sept 2024).</p>
   </div>
 
-  <h3>Cortinas de humo</h3>
+  <h3>Cortinas de humo (resumen)</h3>
   <div class="card">
-    <p><strong>Tuit de Pablo Fernández:</strong> Habla del «lío» del 14 de noviembre, pero es concejal de Urbanismo, no administrativo de Hacienda.</p>
-    <p><strong>Post de Instagram de Raquel Vidal:</strong> Su formación en Madrid es contextualmente interesante pero no ayuda a identificar a B. Algunos grupos se distraerán persiguiendo esta pista.</p>
+    <p><strong>Pablo / Innovación:</strong> Su portfolio incluye «Innovación», lo que puede confundirse con «Modernización y Transformación Digital». El género gramatical y el nombre exacto del área lo descartan.</p>
+    <p><strong>Pablo / tuit:</strong> Se queja del «lío» el 14/11. Es de Urbanismo, no de Hacienda.</p>
+    <p><strong>Daniel García Mora:</strong> Tercer miembro de IT que obliga a descartar un candidato adicional para Empleado/a A. Su horario (09:00) y cargo (prácticas, no responsable) lo eliminan.</p>
+    <p><strong>Raquel / Instagram:</strong> Su formación en Madrid es un dato interesante pero secundario. Su horario habitual de 09:00 ya la descarta para Empleado/a A.</p>
   </div>
 
   <h3>Adaptaciones</h3>
   <div class="card">
-    <p><strong>Si sobra tiempo:</strong> Pedir a los grupos que reescriban una frase del informe usando anonimización correcta.</p>
-    <p><strong>Si falta tiempo:</strong> Saltar Fase 2 como actividad. Mostrarla en pantalla y pasar directo a la conclusión.</p>
-    <p><strong>Público más técnico:</strong> Mencionar k-anonimidad: «la única persona que...» es exactamente k=1. El heatmap de Strava fue un intento de agregación (k alto) que también falló.</p>
-    <p><strong>Público más joven:</strong> Enfatizar redes sociales y Strava. «¿Qué habéis publicado esta semana que podría ser un cuasi-identificador?»</p>
+    <p><strong>Si sobra tiempo:</strong> Pedir a los grupos que reescriban una frase del informe con anonimización correcta.</p>
+    <p><strong>Si falta tiempo:</strong> Mostrar Fase 2 en pantalla sin trabajarla en grupo.</p>
+    <p><strong>Público técnico:</strong> Mencionar k-anonimidad: «la única persona que...» = k=1. El género gramatical como cuasi-identificador es un caso de l-diversidad insuficiente.</p>
+    <p><strong>Público joven:</strong> Enfatizar redes sociales y Strava. «¿Qué habéis publicado esta semana que podría ser un cuasi-identificador?»</p>
   </div>
 </div>
 
@@ -636,23 +637,12 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     event.target.classList.add('active');
     window.scrollTo(0, 0);
   }
-  function revealHint(btn, hintId) {
-    document.getElementById(hintId).classList.toggle('show');
-    btn.classList.toggle('revealed');
-  }
-  function revealAnswers() {
-    document.getElementById('answer-block').classList.add('show');
-  }
+  function revealHint(btn, hintId) { document.getElementById(hintId).classList.toggle('show'); btn.classList.toggle('revealed'); }
+  function revealAnswers() { document.getElementById('answer-block').classList.add('show'); }
   let timerInterval = null;
   function startTimer(seconds) {
-    stopTimer();
-    let remaining = seconds;
-    updateTimerDisplay(remaining);
-    timerInterval = setInterval(() => {
-      remaining--;
-      updateTimerDisplay(remaining);
-      if (remaining <= 0) { stopTimer(); document.getElementById('timer-display').textContent = '⏰ ¡Tiempo!'; }
-    }, 1000);
+    stopTimer(); let remaining = seconds; updateTimerDisplay(remaining);
+    timerInterval = setInterval(() => { remaining--; updateTimerDisplay(remaining); if (remaining <= 0) { stopTimer(); document.getElementById('timer-display').textContent = '⏰ ¡Tiempo!'; } }, 1000);
   }
   function stopTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
   function updateTimerDisplay(s) { document.getElementById('timer-display').textContent = Math.floor(s/60) + ':' + (s%60 < 10 ? '0' : '') + s%60; }
