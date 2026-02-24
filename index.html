@@ -129,13 +129,13 @@
 <div class="topbar">
   <h1>🔍 Jugando a ser <span>Detective</span></h1>
   <div class="nav-btns">
-    <button class="nav-btn active" onclick="showSection('intro')">Inicio</button>
-    <button class="nav-btn" onclick="showSection('fase1')">Dossier</button>
-    <button class="nav-btn" onclick="showSection('worksheet')">Hoja de Trabajo</button>
-    <button class="nav-btn facilitator-only" onclick="showSection('hints')">Pistas</button>
-    <button class="nav-btn facilitator-only" onclick="showSection('answers')">Respuestas</button>
-    <button class="nav-btn" onclick="showSection('takeaway')">Conclusión</button>
-    <button class="nav-btn facilitator-only" onclick="showSection('facilitator')">Guía Facilitador</button>
+    <button class="nav-btn active" onclick="showSection('intro', this)">Inicio</button>
+    <button class="nav-btn" onclick="showSection('fase1', this)">Dossier</button>
+    <button class="nav-btn" onclick="showSection('worksheet', this)">Hoja de Trabajo</button>
+    <button class="nav-btn facilitator-only" onclick="showSection('hints', this)">Pistas</button>
+    <button class="nav-btn facilitator-only" onclick="showSection('answers', this)">Respuestas</button>
+    <button class="nav-btn" onclick="showSection('takeaway', this)">Conclusión</button>
+    <button class="nav-btn facilitator-only" onclick="showSection('facilitator', this)">Guía Facilitador</button>
     <button class="nav-btn mode-toggle" onclick="toggleMode()" title="Mostrar/ocultar herramientas del facilitador">⚙</button>
   </div>
 </div>
@@ -463,8 +463,15 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
   <h3>Reflexión personal (15 segundos en silencio)</h3>
   <div class="card" style="border-left: 4px solid var(--accent); text-align: center; font-family: var(--font-display); font-size: 1.1rem; padding: 28px;">
-    Pensad en vuestro propio lugar de trabajo.<br>
-    ¿Cuántos de estos cuasi-identificadores os describen a vosotros de forma <strong>única</strong>?
+    No hace falta un informe de ciberseguridad.<br>
+    Pensad en cualquier texto que os describa <strong>sin usar vuestro nombre</strong>:<br><br>
+    <span style="font-size: 0.95rem; color: var(--muted); font-style: italic;">
+    Un expediente académico. Una carta de recomendación.<br>
+    Un mensaje reenviado de un grupo de clase. Un parte disciplinario.<br>
+    Un post de un profe que escribe sobre «un alumno que...»<br>
+    Un correo del entrenador sobre el equipo.
+    </span><br><br>
+    ¿Cuántos datos bastarían para que vuestros compañeros supieran que sois vosotros?
   </div>
 
   <h3>Y ahora pensad en vuestras redes sociales</h3>
@@ -475,78 +482,359 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     «Empecé como interino y ya soy fijo» → Antigüedad, descarta que seas un recién llegado.<br>
     «Viernes de formación en Madrid» → Presencia/ausencia en fechas concretas.<br>
     <strong>«Carrera de 10km por el centro» (Strava) → Ubicación del trabajo + rutina diaria.</strong></p>
-    <p>Individualmente parecen inofensivas. Combinadas con un informe mal anonimizado, <strong>son suficientes para identificaros</strong>.</p>
+    <p style="margin-top:12px;">Ahora traducid eso a vuestra vida:</p>
+    <p style="background: #f0f0f0; padding: 12px 16px; border-radius: 4px; font-size: 0.9rem;">
+    📸 «Primer día en 2º Bach» → Curso + centro + fecha.<br>
+    📍 Story en el gimnasio a las 17:00 todos los martes → Rutina + ubicación.<br>
+    🎮 «Estoy en el equipo de debate del instituto» → Actividad + centro.<br>
+    🏃 Ruta de running por tu barrio en Strava → Dónde vives.<br>
+    💬 «No puedo, tengo examen de mates mañana» en un grupo abierto → Horario + curso.</p>
+    <p>Individualmente parecen inofensivas. Combinadas con cualquier documento que os describa sin nombre, <strong>son suficientes para identificaros</strong>.</p>
     <p><em>Los guardaespaldas suecos no compartieron nada sobre sus misiones. Compartieron rutas de running. Eso fue suficiente.</em></p>
   </div>
 
   <h3>Tarjeta para llevar a casa</h3>
   <div class="takeaway-card">
     <div class="takeaway-front">
-      <h3 style="font-size:1.3rem;">🔍 Eliminar nombres NO es suficiente</h3>
-      <p>Los cuasi-identificadores permiten reconstruir identidades combinando fuentes públicas.</p>
+      <div style="font-size: 2.5rem; margin-bottom: 8px;">🔍</div>
+      <h3 style="font-size:1.4rem; margin-bottom: 16px;">Antes de publicar, piensa:</h3>
+      <p style="font-size: 1.3rem; font-weight: 700; line-height: 1.4; color: var(--accent);">
+        ¿Esto + otro dato<br>= yo?
+      </p>
     </div>
-    <div class="takeaway-back">
-      <p style="font-weight:600; margin-bottom:8px;">Cuasi-identificadores comunes:</p>
-      <ul>
-        <li>Puesto de trabajo o cargo</li>
-        <li>Departamento o área</li>
-        <li>Ubicación (planta, oficina)</li>
-        <li>Horario de trabajo</li>
-        <li>Fecha de incorporación</li>
-        <li>Experiencia profesional previa</li>
-        <li>Género gramatical en el texto</li>
-        <li>Publicaciones en redes sociales (LinkedIn, Strava, Facebook, X...)</li>
-      </ul>
-      <p style="font-weight:600; margin-top:12px; font-size:0.82rem; text-align:center;">Taller «Jugando a ser Detective» — Anonimización de ciberincidentes</p>
+    <div class="takeaway-back" style="padding: 16px 20px;">
+      <p style="font-weight: 700; font-size: 0.95rem; margin-bottom: 10px; text-align: center;">Hoy habéis identificado a 3 personas «anónimas» combinando:</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 0.82rem;">
+        <span>📋 Cargo / curso</span>
+        <span>🏢 Departamento / clase</span>
+        <span>📍 Planta / ubicación</span>
+        <span>⏰ Horario</span>
+        <span>📅 Fecha de entrada</span>
+        <span>👤 Género en el texto</span>
+      </div>
+      <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #e0dbd2; text-align: center; font-size: 0.85rem;">
+        <strong>Cada post que publicas es una pieza.<br>Sola no dice nada. Combinada, dice todo.</strong>
+      </div>
+      <p style="font-size: 0.7rem; color: var(--muted); text-align:center; margin-top:8px; margin-bottom:0;">jugandoaserdetective.es</p>
     </div>
   </div>
 </div>
 
 <!-- ===== FACILITATOR GUIDE ===== -->
 <div class="section" id="sec-facilitator">
-  <h2>Guía del Facilitador</h2>
-  <div class="facilitator-note">Esta sección solo es visible para el facilitador. No proyectar ni imprimir para los asistentes.</div>
+  <h2>🎬 Director's Playbook / Guión del Director</h2>
+  <div class="facilitator-note">SOLO PARA TUS OJOS. Si alguien ve esta página, la magia se rompe. No proyectar. No imprimir para participantes.</div>
 
-  <h3>Preparación previa</h3>
-  <div class="card">
-    <p><strong>Materiales:</strong> Imprimir el dossier y la hoja de trabajo para cada grupo (3–5 personas). IMPORTANTE: imprimir la versión <strong>sin anotaciones</strong>. Opcional: rotuladores de colores. Pizarra o papel grande para la puesta en común. Tarjetas de conclusión impresas.</p>
+  <p style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">Esto no es una charla. Es un show. Tú no eres un profesor — eres el presentador de un concurso de detectives. Tu trabajo es crear tensión, mantener el ritmo, y soltar el golpe final cuando nadie se lo espere. Esta guía te da cada palabra, cada pausa, cada gesto. Si es tu primera vez, síguelo al pie de la letra. Si tienes experiencia, improvisa sobre esta base.</p>
+
+  <!-- ==================== PRE-SHOW ==================== -->
+  <h3>🎪 Pre-show — Antes de que llegue nadie</h3>
+  <div class="card" style="border-left: 4px solid var(--ink);">
+    <p><strong>⏱ 15 minutos antes — Montar el escenario</strong></p>
+
+    <p style="margin-top:12px;"><strong>LA MESA:</strong> Cada grupo (3–5 personas) necesita:</p>
+    <p>☐ 1 carpeta cerrada con el dossier dentro (documentos SUELTOS, no grapados — que parezca un expediente policial de verdad)<br>
+    ☐ 1 hoja de respuesta (solo 3 líneas: A=___, B=___, C=___)<br>
+    ☐ Bolígrafos / rotuladores<br>
+    ☐ [Opcional] Rotuladores de colores para subrayar</p>
+
+    <p style="margin-top:12px;"><strong>LA CARPETA CONTIENE</strong> (en este orden, de arriba a abajo):</p>
+    <p>1. El informe de incidente (el documento principal)<br>
+    2. El recorte de prensa (El Diario de Villarreal)<br>
+    3. Las publicaciones de redes sociales<br>
+    4. El organigrama del Ayuntamiento<br>
+    5. El correo interno filtrado</p>
+
+    <p style="margin-top:12px;"><strong>⚠ IMPORTANTE:</strong> Imprimir la versión SIN anotaciones. Si alguien ve los cuasi-identificadores resaltados, se acabó el juego.</p>
+
+    <p style="margin-top:16px;"><strong>EL ENTORNO:</strong></p>
+    <p>☐ Pizarra / papel grande visible para la puesta en común<br>
+    ☐ Temporizador visible (pantalla, móvil grande, o el de la web)<br>
+    ☐ [Expo] Marcador de puntuaciones visible: «RANKING» con espacio para apuntar grupos<br>
+    ☐ [Expo] Premios pequeños listos (pegatinas, pins, caramelos)<br>
+    ☐ Tarjetas de conclusión en un montón aparte (no repartir hasta el final)</p>
+
+    <p style="margin-top:16px;"><strong>TÚ:</strong></p>
+    <p>☐ Leer las respuestas rápidas (más abajo) hasta que las sepas de memoria<br>
+    ☐ Leer las cortinas de humo — si un grupo te pregunta por Pablo o Daniel, necesitas tener la respuesta preparada sin mirar el móvil<br>
+    ☐ Tener esta guía en tu móvil o impresa SOLO PARA TI</p>
   </div>
 
-  <h3>Guión minuto a minuto</h3>
-  <div class="card">
-    <p><strong>0:00 – 0:05 | Introducción</strong></p>
-    <p>Proyectar «Inicio». Contar el caso Strava: «En julio de 2025, siete guardaespaldas del Primer Ministro de Suecia subieron sus rutas de running a Strava. Los periodistas analizaron 1.400 entrenamientos y descubrieron la dirección privada del Primer Ministro, reuniones secretas y vacaciones de la Familia Real. Los guardaespaldas no compartieron nada sobre sus misiones — solo rutas de correr. Pero dónde y cuándo corrían fue suficiente.» Explicar cuasi-identificadores: «Si digo 'la única mujer del departamento de informática que empezó en septiembre', ¿necesito decir su nombre?»</p>
+  <!-- ==================== ACT 1: THE HOOK ==================== -->
+  <h3>🎬 ACTO 1 — El Gancho <span style="color: var(--muted); font-weight:400;">(0:00 – 0:05)</span></h3>
+  <p style="font-size:0.85rem; color: var(--muted);">Objetivo: que quieran abrir la carpeta AHORA MISMO.</p>
 
-    <p style="margin-top:16px;"><strong>0:05 – 0:07 | Reparto y explicación</strong></p>
-    <p>Repartir dossiers y hojas de trabajo. Explicar la misión. Poner temporizador de 10 minutos.</p>
+  <div class="card" style="border-left: 4px solid var(--accent); background: linear-gradient(135deg, #1a1a2e 0%, #2c2c4a 100%); color: var(--paper);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px;">🎤 LO QUE DICES</p>
 
-    <p style="margin-top:16px;"><strong>0:07 – 0:19 | Trabajo en grupo</strong></p>
-    <p>Circular entre grupos. Esperar 4–5 minutos antes de ofrecer pistas. Objetivo: que todos identifiquen al menos a una persona. Con las nuevas dificultades (Daniel, Pablo/Innovación, Javier), esperar que los grupos necesiten más tiempo que antes.</p>
+    <p><em>🇪🇸</em></p>
+    <p style="font-size: 1.05rem;">«Siete guardaespaldas. Una app de fitness.»</p>
+    <p><strong>[PAUSA. Mirar a los ojos. Dos segundos.]</strong></p>
+    <p style="font-size: 1.05rem;">«Y de repente, unos periodistas saben dónde duerme el Primer Ministro de Suecia.»</p>
+    <p><strong>[Dejar que el silencio trabaje. No tengas prisa.]</strong></p>
+    <p style="font-size: 1.05rem;">«Dónde veranea la Familia Real. Cómo es la distribución interna de la sede de la policía secreta.»</p>
+    <p><strong>[Otra pausa. Si alguien reacciona — bien. Si hay silencio — mejor.]</strong></p>
+    <p>«Los guardaespaldas no filtraron ni un solo documento clasificado. No vendieron secretos. No cometieron ningún delito. Solo salieron a correr. Publicaron sus rutas en Strava —una app donde la gente comparte sus entrenamientos. Dónde corrían. Cuándo corrían. Con qué frecuencia. Eso fue suficiente para que los periodistas reconstruyeran los movimientos secretos del Primer Ministro.»</p>
+    <p><strong>[Ahora cambia el tono. Más directo. Más rápido.]</strong></p>
+    <p>«Esto pasó de verdad. Julio de 2025. Y hoy, vosotros vais a hacer exactamente lo que hicieron esos periodistas. Pero con un caso diferente.»</p>
 
-    <p style="margin-top:16px;"><strong>0:19 – 0:24 | Puesta en común</strong></p>
-    <p>Preguntar: ¿A quién habéis identificado? ¿Cómo? Apuntar cuasi-identificadores en la pizarra. Momento clave: preguntar si alguien pensó que Pablo era Empleado/a C — discutir el género gramatical como cuasi-identificador. Si algún grupo se confundió con Daniel para Empleado/a A, discutir cómo los horarios descartaron candidatos. Para Empleado/a B: preguntar cómo llegaron a Elena sin una publicación suya que lo confirmara — discutir el poder de la eliminación.</p>
-
-    <p style="margin-top:16px;"><strong>0:24 – 0:30 | Conclusión</strong></p>
-    <p>Leer frase clave. Reflexión personal (15 segundos). Bloque redes sociales — conectar con Strava. Repartir tarjetas.</p>
+    <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.2);"><em>🇬🇧</em></p>
+    <p style="font-size: 1.05rem;">"Seven bodyguards. One fitness app."</p>
+    <p><strong>[PAUSE. Eye contact. Two seconds.]</strong></p>
+    <p style="font-size: 1.05rem;">"And suddenly, journalists know where the Prime Minister of Sweden sleeps."</p>
+    <p><strong>[Let the silence do the work. Don't rush.]</strong></p>
+    <p style="font-size: 1.05rem;">"Where the Royal Family holidays. The internal layout of the secret police headquarters."</p>
+    <p><strong>[Another pause. If someone reacts — good. If there's silence — better.]</strong></p>
+    <p>"The bodyguards didn't leak a single classified document. Didn't sell secrets. Didn't break any law. They just went for a run. They posted their routes on Strava — an app where people share their workouts. Where they ran. When they ran. How often. That was enough for journalists to reconstruct the Prime Minister's secret movements."</p>
+    <p><strong>[Now shift your tone. More direct. Faster.]</strong></p>
+    <p>"This actually happened. July 2025. And today, you're going to do exactly what those journalists did. But with a different case."</p>
   </div>
 
-  <h3>Preguntas frecuentes del público</h3>
-  <div class="card">
-    <p><strong>«¿Cómo tienen los atacantes ese correo interno?»</strong></p>
-    <p>El correo estaba en la unidad de red compartida de Hacienda/RRHH. Los atacantes extrajeron datos antes de cifrar (doble extorsión) y los publicaron en un foro como prueba del ataque.</p>
-
-    <p style="margin-top:12px;"><strong>«Raquel volvió de Madrid el 8 de noviembre. ¿No podría ser Empleado/a A el 14?»</strong></p>
-    <p>Su horario habitual es 09:00 (confirmado en el correo de octubre). El informe describe a Empleado/a A como «la única persona que entra antes de las 08:30» de forma habitual. Raquel no encaja.</p>
-
-    <p style="margin-top:12px;"><strong>«Daniel trabaja los jueves y el 14 era jueves. ¿No podría ser Empleado/a A?»</strong></p>
-    <p>Daniel entra a las 09:00, no antes de las 08:30. Además, es técnico en prácticas, no «responsable de sistemas».</p>
-
-    <p style="margin-top:12px;"><strong>«Pablo tiene 'Innovación' en su concejalía. ¿No podría ser Empleado/a C?»</strong></p>
-    <p>El informe dice «la concejala» (femenino) y el nombre exacto del área es «Modernización y Transformación Digital», no «Innovación». Pablo es concejal (masculino) de «Urbanismo, Medio Ambiente e Innovación». El solapamiento temático es intencionado como cortina de humo.</p>
-
-    <p style="margin-top:12px;"><strong>«¿La concejala puede contratar un equipo externo?»</strong></p>
-    <p>El informe dice «inició el contacto» — no que firmara un contrato. Operativamente razonable en una emergencia con competencias delegadas.</p>
+  <div class="card" style="border-left: 4px solid var(--muted);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px;">📝 NOTAS PARA TI</p>
+    <p><strong>No expliques qué es un cuasi-identificador todavía.</strong> No uses esa palabra. No digas «hoy vamos a aprender sobre anonimización». Eso mata toda la energía que acabas de construir. Lo van a descubrir solos en 10 minutos.</p>
+    <p style="margin-top:8px;"><strong>Si alguien pregunta «¿qué es Strava?»:</strong> «Una app donde la gente sube sus rutas de correr. Como un Instagram para runners.» Y sigue.</p>
+    <p style="margin-top:8px;"><strong>Si alguien dice «eso ya lo sabía»:</strong> «Bien. Entonces te va a resultar fácil lo que viene.» Sonreír. Seguir.</p>
   </div>
+
+  <!-- ==================== ACT 2: THE MISSION ==================== -->
+  <h3>🎬 ACTO 2 — La Misión <span style="color: var(--muted); font-weight:400;">(0:05 – 0:07)</span></h3>
+  <p style="font-size:0.85rem; color: var(--muted);">Objetivo: que sientan que les están dando acceso a algo confidencial.</p>
+
+  <div class="card" style="border-left: 4px solid var(--accent2); background: linear-gradient(135deg, #1a1a2e 0%, #2c2c4a 100%); color: var(--paper);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #3498db; margin-bottom: 12px;">🎤 LO QUE DICES</p>
+
+    <p><strong>[Señalar las carpetas en las mesas. NO dejar que las abran todavía.]</strong></p>
+
+    <p><em>🇪🇸</em></p>
+    <p>«En vuestras mesas tenéis una carpeta. No la abráis todavía.»</p>
+    <p><strong>[Esperar a que suelten la carpeta. Contacto visual con quien la esté tocando.]</strong></p>
+    <p>«Un ayuntamiento pequeño fue víctima de un ciberataque. Ransomware. Los atacantes cifraron todos los sistemas. Pero antes de cifrar — y esto es lo importante — robaron datos. Correos internos. Documentos de RRHH. Y los publicaron en internet como prueba del ataque.»</p>
+    <p>«El equipo de respuesta escribió un informe del incidente. Para proteger a los empleados, eliminaron los nombres y los sustituyeron por códigos: Empleado A, Empleado B, Empleado C. Pensaron que con eso bastaba.»</p>
+    <p><strong>[Pausa breve. Cambio de tono — ahora es un reto.]</strong></p>
+    <p>«Vamos a comprobar si tenían razón. En la carpeta tenéis el informe, y junto a él, lo que cualquiera puede encontrar en internet: el organigrama de la web del Ayuntamiento, publicaciones de redes sociales, una noticia del periódico local, y uno de los correos que salió en la filtración.»</p>
+    <p>«Si vosotros podéis descubrir quién es quién en 10 minutos, con papel y bolígrafo... imaginad lo que puede hacer alguien con tiempo, herramientas, y una razón para hacerlo. Alguien que quiera presionar a Empleado B — la persona que hizo clic en el enlace — para chantajearla o usarla como puerta de entrada en el próximo ataque.»</p>
+    <p>«Vuestra misión: descubrir quién es quién. Tres identidades ocultas. Tenéis 10 minutos.»</p>
+    <p><strong>[Si hay marcador visible, señalarlo:]</strong> «De momento, el récord está en [X minutos / nadie ha conseguido las tres].»</p>
+    <p><strong>[Poner el temporizador. Dedo en el botón.]</strong></p>
+    <p style="font-size: 1.1rem; font-weight: 700; color: var(--accent);">«Abrid la carpeta. Adelante.»</p>
+
+    <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.2);"><em>🇬🇧</em></p>
+    <p>"On your tables there's a folder. Don't open it yet."</p>
+    <p><strong>[Wait until they put it down. Eye contact with anyone touching it.]</strong></p>
+    <p>"A small local government was hit by a cyberattack. Ransomware. The attackers encrypted all their systems. But before encrypting — and this is the key part — they stole data. Internal emails. HR documents. And published them online as proof of the attack."</p>
+    <p>"The response team wrote an incident report. To protect the employees, they removed the names and replaced them with codes: Employee A, Employee B, Employee C. They thought that would be enough."</p>
+    <p><strong>[Brief pause. Shift tone — now it's a challenge.]</strong></p>
+    <p>"Let's find out if they were right. In the folder you have the report, and alongside it, what anyone can find online: the org chart from the council's website, social media posts, a local newspaper article, and one of the internal emails that surfaced in the leak."</p>
+    <p>"If you can figure out who's who in 10 minutes, with paper and a pen... imagine what someone with time, tools, and a reason to do it could achieve. Someone who wants to pressure Employee B — the person who clicked the link — to blackmail them or use them as a way back in next time."</p>
+    <p>"Your mission: figure out who's who. Three hidden identities. You have 10 minutes."</p>
+    <p><strong>[If scoreboard visible, point to it:]</strong> "The current record is [X minutes / nobody's cracked all three yet]."</p>
+    <p><strong>[Start the timer. Finger on the button.]</strong></p>
+    <p style="font-size: 1.1rem; font-weight: 700; color: var(--accent);">"Open the folder. Go."</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--muted);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px;">📝 NOTAS PARA TI</p>
+    <p><strong>«Vamos a comprobar si tenían razón»</strong> les da una RAZÓN para investigar sin pedirles que se pongan en la piel del atacante. Están probando la defensa, no jugando a ser el villano. Pero las consecuencias siguen ahí: «imaginad lo que puede hacer alguien con tiempo y herramientas» deja claro por qué importa.</p>
+    <p style="margin-top:8px;"><strong>«No la abráis todavía»</strong> es el truco más viejo del mundo y funciona siempre. El segundo que les dices que no la abran, la desean. Cuando dices «Adelante», ya están enganchados.</p>
+    <p style="margin-top:8px;"><strong>Consejo de escenario:</strong> Si puedes, dale al botón del temporizador de forma visible y audible. El sonido del reloj arrancando crea urgencia.</p>
+    <p style="margin-top:8px;"><strong>Si alguien pregunta «¿podemos usar el móvil?»:</strong> «No. Solo lo que hay en la carpeta.» (Esto es importante — evita que busquen en Google y arruinen el juego.)</p>
+  </div>
+
+  <!-- ==================== ACT 3: THE INVESTIGATION ==================== -->
+  <h3>🎬 ACTO 3 — La Investigación <span style="color: var(--muted); font-weight:400;">(0:07 – 0:19)</span></h3>
+  <p style="font-size:0.85rem; color: var(--muted);">Objetivo: 10 minutos de energía creciente. Tu papel: director de orquesta, no profesor.</p>
+
+  <div class="card" style="border-left: 4px solid #f39c12;">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #f39c12; margin-bottom: 12px;">⏱ MINUTOS 0–4 — «El caos productivo»</p>
+    <p><strong>QUÉ HACER:</strong> Circular entre mesas. Manos en los bolsillos. Observar. Escuchar.</p>
+    <p><strong>QUÉ NO HACER:</strong> No intervenir. No explicar. No ayudar. Dejar que se frustren un poco — esa frustración es combustible para cuando lo descubran.</p>
+    <p style="margin-top:8px;"><strong>Lo que verás:</strong> Los primeros 2 minutos serán caóticos. Estarán hojeando sin sistema. Alguien leerá el informe entero. Alguien irá directamente a las redes sociales. Está bien. Hacia el minuto 3–4, empezarán a organizarse solos: «tú lee el informe, yo miro el organigrama».</p>
+    <p style="margin-top:8px;"><strong>Si un grupo no arranca en absoluto</strong> (raro, pero posible): acercarte y decir solo «¿habéis repartido los documentos? Cada uno puede leer uno diferente.» Y alejarte.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #f39c12;">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #f39c12; margin-bottom: 12px;">🔥 EL PRIMER ACIERTO — «Amplificar»</p>
+    <p>Normalmente, algún grupo descubrirá a <strong>Empleado/a C (Marta)</strong> primero. Lo sabrás porque alguien dirá «¡es Marta!» o «¡la concejala!».</p>
+
+    <p style="margin-top:12px;"><strong>En ese momento — AMPLIFICAR:</strong></p>
+    <p><em>🇪🇸</em> Acercarte al grupo. Confirmar discretamente. Luego, en voz alta para que toda la sala oiga:</p>
+    <p style="font-size: 1.05rem; font-weight: 600;">«¡Tenemos una identificación! Un grupo ha descubierto a uno de los tres. Os faltan dos.»</p>
+    <p><em>🇬🇧</em> <span style="font-size: 1.05rem; font-weight: 600;">"We have a match! One group has identified one of the three. Two to go."</span></p>
+
+    <p style="margin-top:8px;"><strong>¿Por qué en voz alta?</strong> Porque los otros grupos oyen que alguien va por delante. Eso activa la competitividad inmediatamente. Verás cómo se inclinan sobre los documentos.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #f39c12;">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #f39c12; margin-bottom: 12px;">⏱ MINUTOS 5–7 — «Empujar sin resolver»</p>
+    <p>Algunos grupos estarán atascados. Tu trabajo ahora es <strong>redirigir, nunca resolver</strong>. Acércate y haz UNA pregunta. Solo una. Y aléjate.</p>
+
+    <p style="margin-top:12px;"><strong>Si están atascados con Empleado/a A:</strong></p>
+    <p><em>🇪🇸</em> «¿Cuántas personas hay en el departamento de informática?» o «¿Habéis mirado el correo filtrado?»</p>
+    <p><em>🇬🇧</em> "How many people are in the IT department?" or "Have you looked at the leaked email?"</p>
+
+    <p style="margin-top:12px;"><strong>Si están atascados con Empleado/a C:</strong></p>
+    <p><em>🇪🇸</em> «Fijaos en el nombre exacto del área. ¿Y en el género gramatical?»</p>
+    <p><em>🇬🇧</em> "Look at the exact name of the department. And the grammatical gender?"</p>
+
+    <p style="margin-top:12px;"><strong>Si están atascados con Empleado/a B:</strong></p>
+    <p><em>🇪🇸</em> «¿Quién trabaja en Hacienda? ¿Cuánto tiempo lleva cada uno?»</p>
+    <p><em>🇬🇧</em> "Who works in the Finance department? How long has each of them been there?"</p>
+
+    <p style="margin-top:12px;"><strong>Si un grupo va por TODAS las pistas y necesita más ayuda:</strong> Usa el sistema formal de pistas (sección «Pistas»). Empezar siempre por el Empujoncito. Solo subir de nivel si siguen bloqueados.</p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #f39c12;">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #f39c12; margin-bottom: 12px;">⏱ MINUTOS 8–10 — «La cuenta atrás»</p>
+    <p><strong>Minuto 8:</strong></p>
+    <p><em>🇪🇸</em> «Dos minutos. Si tenéis alguna respuesta, apuntadla ahora.»</p>
+    <p><em>🇬🇧</em> "Two minutes. If you've got any answers, write them down now."</p>
+
+    <p style="margin-top:12px;"><strong>Minuto 9:</strong></p>
+    <p><em>🇪🇸</em> «Un minuto. Cerrad vuestras respuestas.»</p>
+    <p><em>🇬🇧</em> "One minute. Lock in your answers."</p>
+
+    <p style="margin-top:12px;"><strong>Minuto 10 — El timbre:</strong></p>
+    <p><em>🇪🇸</em> «¡Tiempo! Bolígrafos abajo.»</p>
+    <p><em>🇬🇧</em> "Time! Pens down."</p>
+
+    <p style="margin-top:8px;"><strong>[Expo — Actualizar el marcador si corresponde.]</strong></p>
+  </div>
+
+  <!-- ==================== ACT 4: THE REVEAL ==================== -->
+  <h3>🎬 ACTO 4 — La Revelación <span style="color: var(--muted); font-weight:400;">(0:19 – 0:24)</span></h3>
+  <p style="font-size:0.85rem; color: var(--muted);">Objetivo: revelar las respuestas de forma que cada una sea un momento de drama. La tercera revelación (Elena) es el golpe definitivo del taller.</p>
+
+  <div class="card" style="border-left: 4px solid var(--green); background: linear-gradient(135deg, #1a1a2e 0%, #2c2c4a 100%); color: var(--paper);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); margin-bottom: 12px;">🎤 REVELACIÓN 1 — Empleado/a C (la más fácil, para calentar)</p>
+
+    <p><em>🇪🇸</em></p>
+    <p>«Empecemos por Empleado/a C. ¿Quién creéis que es?»</p>
+    <p><strong>[Dejar que respondan. Si dicen «Marta» → reaccionar con energía.]</strong></p>
+    <p>«¿Cómo lo habéis conseguido?»</p>
+    <p><strong>[Ir apuntando en la pizarra lo que digan: «concejala», «Modernización y Transformación Digital», «16 años en ciberseguridad»...]</strong></p>
+    <p>«¿Alguien pensó que podría ser Pablo?»</p>
+    <p><strong>[Si dicen que sí — PERFECTO. Esa trampa estaba puesta a propósito.]</strong></p>
+    <p>«Pablo tiene "Innovación" en su concejalía. Parece que encaja. Pero fijaos: el informe dice "la concejala" — en femenino. Y dice "Modernización y Transformación Digital", no "Innovación". Dos datos que parecen pequeños y que lo descartaron.»</p>
+    <p><strong>[Escribir en la pizarra: GÉNERO GRAMATICAL. Subrayar.]</strong></p>
+
+    <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.2);"><em>🇬🇧</em></p>
+    <p>"Let's start with Employee C. Who do you think it is?"</p>
+    <p><strong>[Let them answer. If they say "Marta" → react with energy.]</strong></p>
+    <p>"How did you figure it out?"</p>
+    <p><strong>[Write on the board what they say: "councillor", "Digital Transformation", "16 years in cybersecurity"...]</strong></p>
+    <p>"Did anyone think it might be Pablo?"</p>
+    <p><strong>[If they did — PERFECT. That trap was set deliberately.]</strong></p>
+    <p>"Pablo has 'Innovation' in his portfolio. Looks like it fits. But the report says 'la concejala' — feminine form. And it says 'Modernización y Transformación Digital', not 'Innovation'. Two details that seem minor, and they ruled him out."</p>
+    <p><strong>[Write on the board: GRAMMATICAL GENDER. Underline.]</strong></p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--green); background: linear-gradient(135deg, #1a1a2e 0%, #2c2c4a 100%); color: var(--paper);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green); margin-bottom: 12px;">🎤 REVELACIÓN 2 — Empleado/a A (subimos la dificultad)</p>
+
+    <p><em>🇪🇸</em></p>
+    <p>«Empleado/a A. ¿Quién es?»</p>
+    <p><strong>[Dejar que respondan.]</strong></p>
+    <p>«¿Cómo habéis llegado a Sergio?»</p>
+    <p><strong>[Apuntar lo que digan: «responsable de sistemas», «entra antes de las 08:30», «correo con los horarios»...]</strong></p>
+    <p>«¿Alguien consideró a Daniel?»</p>
+    <p><strong>[Si dicen que sí:]</strong> «Buena pista falsa. Daniel está en informática y trabaja los jueves — y el 14 de noviembre era jueves. Pero su horario es las 09:00, no antes de las 08:30. Y es técnico en prácticas, no responsable de sistemas. Dos datos que lo descartaron.»</p>
+    <p>«¿Y Raquel?»</p>
+    <p><strong>[Si alguien la consideró:]</strong> «Raquel ya había vuelto de Madrid — su curso terminó el 8. Pero su horario habitual es las 09:00. No encaja.»</p>
+    <p><strong>[Añadir a la pizarra: HORARIO DE ENTRADA. CARGO.]</strong></p>
+
+    <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.2);"><em>🇬🇧</em></p>
+    <p>"Employee A. Who is it?"</p>
+    <p><strong>[Let them answer.]</strong></p>
+    <p>"How did you get to Sergio?"</p>
+    <p><strong>[Write what they say: "head of IT", "arrives before 08:30", "email with schedules"...]</strong></p>
+    <p>"Did anyone consider Daniel?"</p>
+    <p><strong>[If they did:]</strong> "Good red herring. Daniel's in IT and works Thursdays — and November 14th was a Thursday. But his start time is 09:00, not before 08:30. And he's an intern, not the head of IT. Two details that ruled him out."</p>
+    <p>"And Raquel?"</p>
+    <p><strong>[If anyone considered her:]</strong> "Raquel was back from Madrid — her course ended on the 8th. But her regular start time is 09:00. Doesn't fit."</p>
+    <p><strong>[Add to the board: START TIME. JOB TITLE.]</strong></p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--accent); background: linear-gradient(135deg, #1a1a2e 0%, #2c2c4a 100%); color: var(--paper);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 12px;">🎤 REVELACIÓN 3 — Empleado/a B (EL GOLPE DEFINITIVO)</p>
+    <p style="font-size: 0.82rem; color: rgba(245,240,232,0.6); margin-bottom: 12px;"><em>Este es el momento más importante del taller. No lo apresures. / This is the most important moment of the workshop. Don't rush it.</em></p>
+
+    <p><em>🇪🇸</em></p>
+    <p>«Y la más difícil. Empleado/a B. ¿Quién es?»</p>
+    <p><strong>[Dejar que respondan. Si dicen «Elena» → no confirmar inmediatamente. Preguntar:]</strong></p>
+    <p>«¿Cómo lo habéis conseguido?»</p>
+    <p><strong>[Probablemente dirán: «Javier lleva mucho tiempo, así que tiene que ser Elena» o «por descarte».]</strong></p>
+    <p><strong>[Confirmar:]</strong> «Es Elena. Correcto.»</p>
+    <p><strong>[PAUSA. Ahora viene el golpe. Hablar más despacio.]</strong></p>
+    <p style="font-size: 1.05rem;">«Pero quiero que penséis en algo. Elena no tiene ninguna publicación en redes sociales en el dossier. Cero. No publicó nada sobre su trabajo. No cometió ningún error. No compartió de más. Hizo todo bien.»</p>
+    <p><strong>[Pausa.]</strong></p>
+    <p style="font-size: 1.05rem;">«Y aun así la habéis identificado.»</p>
+    <p><strong>[Dejar que eso aterrice. 3 segundos.]</strong></p>
+    <p>«Solo necesitabais que el otro candidato no encajara. No necesitabais que Elena cometiera un error. Necesitabais que Javier publicara lo suficiente como para descartarlo.»</p>
+    <p>«Así funciona la re-identificación en la vida real. No necesitas que la víctima haga nada mal. Solo necesitas que los datos de los demás apunten en su dirección.»</p>
+
+    <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.2);"><em>🇬🇧</em></p>
+    <p>"And the hardest one. Employee B. Who is it?"</p>
+    <p><strong>[Let them answer. If they say "Elena" → don't confirm immediately. Ask:]</strong></p>
+    <p>"How did you get there?"</p>
+    <p><strong>[They'll likely say: "Javier's been there a long time, so it has to be Elena" or "by elimination".]</strong></p>
+    <p><strong>[Confirm:]</strong> "It's Elena. Correct."</p>
+    <p><strong>[PAUSE. Here comes the punch. Speak slower.]</strong></p>
+    <p style="font-size: 1.05rem;">"But I want you to think about something. Elena has no social media post in the dossier. Zero. She didn't post about her job. She made no mistake. She didn't overshare. She did everything right."</p>
+    <p><strong>[Pause.]</strong></p>
+    <p style="font-size: 1.05rem;">"And you still identified her."</p>
+    <p><strong>[Let that land. 3 seconds.]</strong></p>
+    <p>"You just needed the other candidate to not fit. You didn't need Elena to make a mistake. You needed Javier to post enough to rule him out."</p>
+    <p>"That's how re-identification works in real life. You don't need the victim to do anything wrong. You just need everyone else's data to point in their direction."</p>
+  </div>
+
+  <!-- ==================== ACT 5: THE TWIST ==================== -->
+  <h3>🎬 ACTO 5 — El Giro Final <span style="color: var(--muted); font-weight:400;">(0:24 – 0:30)</span></h3>
+  <p style="font-size:0.85rem; color: var(--muted);">Objetivo: que salgan de la sala pensando en sus propios datos. El giro: ellos no son los detectives. Ellos son los sospechosos.</p>
+
+  <div class="card" style="border-left: 4px solid #8e44ad; background: linear-gradient(135deg, #1a1a2e 0%, #2c2c4a 100%); color: var(--paper);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #8e44ad; margin-bottom: 12px;">🎤 EL GIRO</p>
+
+    <p><em>🇪🇸</em></p>
+    <p><strong>[Señalar la pizarra con todos los cuasi-identificadores.]</strong></p>
+    <p>«Mirad la pizarra. Cargo. Departamento. Planta. Horario. Género gramatical. Antigüedad.»</p>
+    <p>«Todo eso estaba en un informe que intentaba proteger a estas personas. Alguien se sentó, eliminó los nombres, y pensó: "ya está, están protegidos". Y habéis tardado menos de 10 minutos en desmontarlo.»</p>
+    <p><strong>[Pausa. Cambio de tono — ahora es personal.]</strong></p>
+    <p>«Pero no hace falta un informe de ciberseguridad para que esto os afecte a vosotros.»</p>
+    <p>«Pensad en cualquier texto que os describa sin usar vuestro nombre. Un expediente académico. Una carta de recomendación. Un mensaje reenviado de un grupo de clase. Un post de un profe que escribe "un alumno que...". Un correo del entrenador sobre el equipo.»</p>
+    <p>«Si alguien escribe "el único repetidor de 2ºA que juega en el equipo de fútbol"... ¿necesita decir tu nombre?»</p>
+    <p><strong>[SILENCIO. 5 segundos completos. Contarlos mentalmente. No rellenar.]</strong></p>
+    <p>«¿Y qué habéis publicado esta semana? ¿Una story en el gimnasio siempre a la misma hora? ¿Una ruta en Strava por vuestro barrio? ¿Un "primer día de clase" con la ubicación del instituto?»</p>
+    <p>«Cada publicación es una pieza del rompecabezas. Sola no dice nada.»</p>
+    <p><strong>[Pausa breve.]</strong></p>
+    <p style="font-size: 1.1rem; font-weight: 700;">«Combinada, dice todo.»</p>
+    <p><strong>[Repartir tarjetas de conclusión.]</strong></p>
+
+    <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(245,240,232,0.2);"><em>🇬🇧</em></p>
+    <p><strong>[Point at the board with all the quasi-identifiers.]</strong></p>
+    <p>"Look at the board. Job title. Department. Floor. Schedule. Grammatical gender. Seniority."</p>
+    <p>"All of that was in a report that was trying to protect these people. Someone sat down, removed the names, and thought: 'Done. They're protected.' And you dismantled it in under 10 minutes."</p>
+    <p><strong>[Pause. Shift tone — now it's personal.]</strong></p>
+    <p>"But you don't need a cybersecurity report for this to affect you."</p>
+    <p>"Think about any text that describes you without using your name. A school record. A recommendation letter. A forwarded group chat message. A teacher posting about 'a student who...'. A coach's email about the team."</p>
+    <p>"If someone writes 'the only student who repeated year 11 and plays on the football team'... do they need to say your name?"</p>
+    <p><strong>[SILENCE. 5 full seconds. Count them in your head. Don't fill them.]</strong></p>
+    <p>"And what did you post this week? A gym story at the same time every day? A running route through your neighbourhood? A 'first day of school' with the location tagged?"</p>
+    <p>"Every post is a piece of the puzzle. Alone it means nothing."</p>
+    <p><strong>[Brief pause.]</strong></p>
+    <p style="font-size: 1.1rem; font-weight: 700;">"Combined, it says everything."</p>
+    <p><strong>[Hand out takeaway cards.]</strong></p>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--muted);">
+    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px;">📝 NOTAS PARA TI</p>
+    <p><strong>Los 5 segundos de silencio son lo más difícil de este taller.</strong> Tu instinto será rellenarlos. No lo hagas. Esos 5 segundos son donde el mensaje aterriza. Si hablas, lo rompes.</p>
+    <p style="margin-top:8px;"><strong>La frase final</strong> («Combinada, dice todo» / «Combined, it says everything») tiene que ser la última cosa que oigan. No añadas «bueno, pues eso es todo» ni «gracias por participar». Solo la frase. Y las tarjetas.</p>
+    <p style="margin-top:8px;"><strong>[Expo]</strong> Si hay otro grupo esperando, date 30 segundos para resetear: recoger carpetas, poner nuevas, actualizar el marcador. La transición rápida mantiene la energía del stand.</p>
+  </div>
+
+  <!-- ==================== REFERENCE MATERIAL ==================== -->
+  <h3>📋 Material de referencia rápida</h3>
 
   <h3>Respuestas rápidas</h3>
   <div class="card">
@@ -555,29 +843,45 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <p><strong>Empleado/a B = Elena Paredes Ruiz</strong> (difícil) — Organigrama (2 admin en Hacienda) + LinkedIn Javier (interino→fijo, implica antigüedad) → Elena por eliminación.</p>
   </div>
 
-  <h3>Cortinas de humo (resumen)</h3>
+  <h3>Cortinas de humo — Ten estas respuestas preparadas</h3>
   <div class="card">
-    <p><strong>Pablo / Innovación:</strong> Su portfolio incluye «Innovación», lo que puede confundirse con «Modernización y Transformación Digital». El género gramatical y el nombre exacto del área lo descartan.</p>
-    <p><strong>Pablo / tuit:</strong> Se queja del «lío» el 14/11. Es de Urbanismo, no de Hacienda.</p>
-    <p><strong>Daniel García Mora:</strong> Tercer miembro de IT que obliga a descartar un candidato adicional para Empleado/a A. Su horario (09:00) y cargo (prácticas, no responsable) lo eliminan.</p>
-    <p><strong>Raquel / Instagram:</strong> Su formación en Madrid es un dato interesante pero secundario. Su horario habitual de 09:00 ya la descarta para Empleado/a A.</p>
+    <p><strong>«¿Y Pablo? Tiene Innovación...»</strong> → El informe dice «la concejala» (femenino) y «Modernización y Transformación Digital» (nombre exacto). Pablo es concejal (masculino) de «Urbanismo, Medio Ambiente e Innovación». Trampa intencionada.</p>
+    <p style="margin-top:8px;"><strong>«¿Y Daniel? Trabaja los jueves...»</strong> → Sí, pero entra a las 09:00, no antes de las 08:30. Y es técnico en prácticas, no responsable de sistemas.</p>
+    <p style="margin-top:8px;"><strong>«¿Y Raquel? Ya había vuelto de Madrid...»</strong> → Sí, pero su horario habitual es las 09:00. No encaja con «la única persona que entra antes de las 08:30».</p>
+    <p style="margin-top:8px;"><strong>«El tuit de Pablo sobre "menudo lío"...»</strong> → Es de Urbanismo, no de Hacienda. Cortina de humo.</p>
+    <p style="margin-top:8px;"><strong>«¿Cómo tienen los atacantes ese correo interno?»</strong> → Doble extorsión: los atacantes robaron datos ANTES de cifrar y los publicaron como prueba del ataque. Es una táctica estándar de ransomware.</p>
+  </div>
+
+  <h3>Consejos para formato expo / Expo format tips</h3>
+  <div class="card" style="border-left: 4px solid #e67e22;">
+    <p><strong>🏆 Marcador / Scoreboard:</strong></p>
+    <p><em>🇪🇸</em> Mantener un marcador visible: «Grupo 1: 2/3 en 9 min. Grupo 2: 3/3 en 7 min.» Cada grupo nuevo llega con un reto que batir.</p>
+    <p><em>🇬🇧</em> Keep a visible scoreboard. Every new group walks up to a benchmark to beat.</p>
+
+    <p style="margin-top:12px;"><strong>🎁 Premios / Prizes:</strong></p>
+    <p><em>🇪🇸</em> Algo pequeño: pegatina de «Detective», caramelo, pin. Lo importante no es el premio — es el permiso para competir.</p>
+    <p><em>🇬🇧</em> Something small: "Detective" sticker, sweet, pin. The point isn't the prize — it's the permission to compete.</p>
+
+    <p style="margin-top:12px;"><strong>📁 Dossier físico / Physical dossier:</strong></p>
+    <p><em>🇪🇸</em> Documentos SUELTOS dentro de una carpeta. Que parezca un expediente de verdad. Se reparte el trabajo y queda mucho mejor en la mesa.</p>
+    <p><em>🇬🇧</em> LOOSE documents inside a folder. Make it look like a real case file. It forces groups to split the work and looks far more engaging.</p>
   </div>
 
   <h3>Adaptaciones</h3>
   <div class="card">
-    <p><strong>Si sobra tiempo:</strong> Pedir a los grupos que reescriban una frase del informe con anonimización correcta.</p>
-    <p><strong>Si falta tiempo:</strong> Saltar directamente a la conclusión tras la puesta en común.</p>
+    <p><strong>Si sobra tiempo:</strong> Pedir a los grupos que reescriban una frase del informe con anonimización correcta. «¿Cómo describiríais a Empleado A sin que se pueda identificar?»</p>
+    <p><strong>Si falta tiempo:</strong> Saltar directamente a la conclusión tras revelar las respuestas.</p>
     <p><strong>Público técnico:</strong> Mencionar k-anonimidad: «la única persona que...» = k=1. El género gramatical como cuasi-identificador es un caso de l-diversidad insuficiente.</p>
-    <p><strong>Público joven:</strong> Enfatizar redes sociales y Strava. «¿Qué habéis publicado esta semana que podría ser un cuasi-identificador?»</p>
+    <p><strong>Público joven:</strong> Cargar más en los ejemplos de redes sociales y Strava. «¿Qué habéis publicado esta semana que podría ser un cuasi-identificador?»</p>
   </div>
 </div>
 
 <script>
-  function showSection(id) {
+  function showSection(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById('sec-' + id).classList.add('active');
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
+    if (btn) btn.classList.add('active');
     window.scrollTo(0, 0);
   }
   function toggleMode() {
@@ -599,4 +903,10 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
   let timerInterval = null;
   function startTimer(seconds) {
     stopTimer(); let remaining = seconds; updateTimerDisplay(remaining);
-    timerInterval = setInterval(() => { remaining--; updateTimerDisplay(remaining); if (remaining <=
+    timerInterval = setInterval(() => { remaining--; updateTimerDisplay(remaining); if (remaining <= 0) stopTimer(); }, 1000);
+  }
+  function stopTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
+  function updateTimerDisplay(s) { document.getElementById('timer-display').textContent = Math.floor(s/60) + ':' + (s%60 < 10 ? '0' : '') + s%60; }
+</script>
+</body>
+</html>
