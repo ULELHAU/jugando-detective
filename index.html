@@ -113,6 +113,9 @@
   .step-card .step-num { font-size: 1.8rem; font-weight: 700; color: var(--accent); font-family: var(--font-display); }
   .step-card .step-title { font-weight: 600; margin: 6px 0 4px; }
   .step-card .step-time { font-size: 0.8rem; color: var(--muted); }
+  .mode-toggle { background: rgba(245,240,232,0.15) !important; font-size: 1rem !important; padding: 4px 10px !important; }
+  .mode-toggle:hover { background: rgba(245,240,232,0.3) !important; }
+  body.public-mode .facilitator-only { display: none !important; }
   @media print {
     .topbar, .timer-bar, .nav-btns, .hint-btn, .reveal-btn, .facilitator-note { display: none !important; }
     .section { display: block !important; page-break-after: always; max-width: 100%; padding: 20px; }
@@ -127,17 +130,17 @@
   <h1>🔍 Jugando a ser <span>Detective</span></h1>
   <div class="nav-btns">
     <button class="nav-btn active" onclick="showSection('intro')">Inicio</button>
-    <button class="nav-btn" onclick="showSection('fase1')">Fase 1: Dossier</button>
+    <button class="nav-btn" onclick="showSection('fase1')">Dossier</button>
     <button class="nav-btn" onclick="showSection('worksheet')">Hoja de Trabajo</button>
-    <button class="nav-btn" onclick="showSection('hints')">Pistas</button>
-    <button class="nav-btn" onclick="showSection('answers')">Respuestas</button>
-    <button class="nav-btn" onclick="showSection('fase2')">Fase 2: Anonimizado</button>
+    <button class="nav-btn facilitator-only" onclick="showSection('hints')">Pistas</button>
+    <button class="nav-btn facilitator-only" onclick="showSection('answers')">Respuestas</button>
     <button class="nav-btn" onclick="showSection('takeaway')">Conclusión</button>
-    <button class="nav-btn" onclick="showSection('facilitator')">Guía Facilitador</button>
+    <button class="nav-btn facilitator-only" onclick="showSection('facilitator')">Guía Facilitador</button>
+    <button class="nav-btn mode-toggle" onclick="toggleMode()" title="Mostrar/ocultar herramientas del facilitador">⚙</button>
   </div>
 </div>
 
-<div class="timer-bar">
+<div class="timer-bar facilitator-only">
   <span id="timer-display">10:00</span>
   <button onclick="startTimer(600)">10 min</button>
   <button onclick="startTimer(300)">5 min</button>
@@ -152,8 +155,8 @@
     <p class="subtitle">Un taller sobre los riesgos reales de la pseudonimización incompleta</p>
   </div>
   <div class="intro-stats">
-    <div class="intro-stat"><div class="num">30</div><div class="lbl">minutos</div></div>
-    <div class="intro-stat"><div class="num">2</div><div class="lbl">fases</div></div>
+    <div class="intro-stat"><div class="num">27</div><div class="lbl">minutos</div></div>
+    <div class="intro-stat"><div class="num">3</div><div class="lbl">identidades</div></div>
     <div class="intro-stat"><div class="num">1</div><div class="lbl">mensaje clave</div></div>
   </div>
   <div class="highlight-box">«Eliminar los nombres <strong>no es suficiente</strong>.»</div>
@@ -173,17 +176,16 @@
   <h3>Estructura del taller</h3>
   <div class="steps-grid">
     <div class="step-card"><div class="step-num">1</div><div class="step-title">Introducción</div><div class="step-time">~5 min</div><p style="font-size:0.85rem; margin-top:4px;">El caso Strava y las reglas</p></div>
-    <div class="step-card"><div class="step-num">2</div><div class="step-title">Fase 1: Detective</div><div class="step-time">~12 min</div><p style="font-size:0.85rem; margin-top:4px;">Informe + artefactos = ¿quién es quién?</p></div>
+    <div class="step-card"><div class="step-num">2</div><div class="step-title">Fase Detective</div><div class="step-time">~12 min</div><p style="font-size:0.85rem; margin-top:4px;">Informe + artefactos = ¿quién es quién?</p></div>
     <div class="step-card"><div class="step-num">3</div><div class="step-title">Puesta en común</div><div class="step-time">~5 min</div><p style="font-size:0.85rem; margin-top:4px;">¿Cómo lo habéis logrado?</p></div>
-    <div class="step-card"><div class="step-num">4</div><div class="step-title">Fase 2: Anonimizado</div><div class="step-time">~4 min</div><p style="font-size:0.85rem; margin-top:4px;">¿Funciona la anonimización correcta?</p></div>
-    <div class="step-card"><div class="step-num">5</div><div class="step-title">Conclusión</div><div class="step-time">~5 min</div><p style="font-size:0.85rem; margin-top:4px;">Mensaje clave y reflexión personal</p></div>
+    <div class="step-card"><div class="step-num">4</div><div class="step-title">Conclusión</div><div class="step-time">~5 min</div><p style="font-size:0.85rem; margin-top:4px;">Mensaje clave y reflexión personal</p></div>
   </div>
 </div>
 
 <!-- ===== FASE 1: DOSSIER ===== -->
 <!-- ARTEFACT ORDER: Report → Newspaper → Social Media → Org Chart → Leaked Email -->
 <div class="section" id="sec-fase1">
-  <h2>Fase 1 — El Dossier del Incidente</h2>
+  <h2>El Dossier del Incidente</h2>
   <p>El Ayuntamiento de <strong>Villarreal de la Sierra</strong> (municipio ficticio, ~18.000 habitantes) sufrió un ataque de ransomware el 14 de noviembre de 2024. Se ha pseudonimizado el informe eliminando los nombres. <strong>Vuestra misión:</strong> usando los artefactos disponibles, intentad identificar a las personas designadas como Empleado/a A, B y C.</p>
 
   <!-- 1. INFORME (CLEAN) -->
@@ -273,24 +275,13 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
       <div class="post-engagement">❤️ 8 · 💬 3 · 🔄 1</div>
     </div>
 
-    <!-- Elena - Facebook (NO MENTION OF HACIENDA) -->
-    <div class="social-post">
-      <div class="post-header">
-        <div class="avatar" style="background:#4267B2;">EP</div>
-        <div><div class="post-name">Elena Paredes Ruiz</div><div class="post-handle">Facebook · Grupo "Villarreal de la Sierra — Vecinos"</div></div>
-      </div>
-      <div class="post-body">¡Por fin puedo decirlo! Acabo de aprobar las oposiciones y en septiembre empiezo a trabajar en el Ayuntamiento 🎉🎉🎉 ¡¡Funcionaria!! Después de 3 años preparándome, no me lo creo. Gracias a todos los que me habéis apoyado. ¡Nos vemos en el Ayuntamiento! 😄</div>
-      <div class="post-date">28 de agosto de 2024</div>
-      <div class="post-engagement">❤️ 243 · 💬 67 comentarios</div>
-    </div>
-
-    <!-- Javier - LinkedIn (ELIMINATES HIM — 5 year anniversary) -->
+    <!-- Javier - LinkedIn (ELIMINATES HIM — tenure implied, not stated) -->
     <div class="social-post">
       <div class="post-header">
         <div class="avatar" style="background:#0077b5;">JL</div>
         <div><div class="post-name">Javier López Martín</div><div class="post-handle">LinkedIn · 3ª conexión</div></div>
       </div>
-      <div class="post-body">5 años ya en el Ayuntamiento de Villarreal de la Sierra. Empecé como interino y hoy soy parte del equipo fijo de Hacienda. Parece mentira lo rápido que pasa el tiempo. Agradecido al equipo y a Carmen por la confianza. ¡A por otros 5! 💼</div>
+      <div class="post-body">Parece mentira cómo pasa el tiempo. Empecé como interino en el Ayuntamiento de Villarreal de la Sierra y hoy soy parte del equipo fijo de Hacienda. Agradecido al equipo y a Carmen por la confianza. ¡A seguir! 💼</div>
       <div class="post-date">15 de octubre de 2024</div>
       <div class="post-engagement">❤️ 87 · 💬 14 comentarios</div>
     </div>
@@ -334,7 +325,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <span class="label-tag email-tag">Artefacto 4 — Correo interno filtrado</span>
     <p style="font-size:0.88rem; margin-bottom:12px;">Fuente: Este correo fue encontrado entre los datos robados durante el ataque de ransomware. Los atacantes extrajeron datos de la unidad de red compartida de Hacienda/RRHH antes de cifrarla, y publicaron una selección de correos internos en un foro de ciberseguridad como prueba del ataque (táctica habitual en ransomware de doble extorsión).</p>
     <div style="font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; background: #f9f9f9; padding: 16px; border-radius: 4px;">
-      <strong>De:</strong> sergio.molina@villarrealdelasierra.es<br>
+      <strong>De:</strong> s.molina@villarrealdelasierra.es<br>
       <strong>Para:</strong> rrhh@villarrealdelasierra.es<br>
       <strong>Fecha:</strong> 2 de octubre de 2024, 10:14<br>
       <strong>Asunto:</strong> RE: Horarios equipo informática — Cuarto trimestre<br><br>
@@ -402,8 +393,8 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <button class="hint-btn" onclick="revealHint(this, 'hintB2')">🧭 Dirección</button>
     <button class="hint-btn" onclick="revealHint(this, 'hintB3')">🎯 Casi-casi</button>
     <div class="hint-content nudge" id="hintB1">El informe dice que Empleado/a B trabaja en Hacienda y es de reciente incorporación. ¿Cuántas personas de Hacienda veis en el organigrama?</div>
-    <div class="hint-content direction" id="hintB2">Hay tres personas en Hacienda: Carmen (concejala), Elena y Javier (ambos administrativos). El informe dice «personal administrativo», así que Carmen queda descartada. ¿Quién de los dos podría llevar «menos de tres meses» en noviembre de 2024? Mirad las redes sociales de ambos.</div>
-    <div class="hint-content almost" id="hintB3">Javier publicó en LinkedIn en octubre de 2024 que cumplía 5 años en el Ayuntamiento — no es un recién llegado. Elena publicó en Facebook en agosto de 2024 que aprobó las oposiciones y empezaría en septiembre. Si empezó en septiembre y el incidente fue en noviembre, lleva menos de tres meses. Es Elena Paredes Ruiz. Cuidado: el tuit de Pablo sobre «menudo lío» es una cortina de humo — es de Urbanismo.</div>
+    <div class="hint-content direction" id="hintB2">Hay tres personas en Hacienda: Carmen (concejala), Elena y Javier (ambos administrativos). El informe dice «personal administrativo», así que Carmen queda descartada. ¿Quién de los dos podría llevar «menos de tres meses» en noviembre de 2024? Buscad pistas en las redes sociales.</div>
+    <div class="hint-content almost" id="hintB3">Javier publicó en LinkedIn en octubre de 2024 que empezó como interino y ya es parte del equipo fijo — eso implica tiempo considerable, no es un recién llegado. Si Javier no es el nuevo... solo queda Elena. No hay publicación suya que lo confirme directamente, pero la eliminación de Javier es suficiente. Es Elena Paredes Ruiz.</div>
   </div>
 </div>
 
@@ -432,8 +423,8 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
       <span class="difficulty hard">Difícil</span>
       <h3 style="margin-top:4px;">Empleado/a B = Elena Paredes Ruiz</h3>
       <p><strong>Cuasi-identificadores:</strong> «personal administrativo de Hacienda» + «reciente incorporación» + «menos de tres meses en el puesto».</p>
-      <p><strong>Artefactos:</strong> Organigrama (tres personas en Hacienda: Carmen es concejala → quedan Elena y Javier) + LinkedIn de Javier (5 años en el Ayuntamiento → no es recién llegado) + Facebook de Elena (aprobó oposiciones en agosto, empezó en septiembre → menos de 3 meses en noviembre).</p>
-      <p><strong>Razonamiento completo:</strong> Elena no menciona «Hacienda» en su post — solo dice «el Ayuntamiento». Los grupos necesitan: 1) saber que B está en Hacienda (del informe), 2) ver en el organigrama que Elena está en Hacienda, 3) descartar a Javier (LinkedIn: 5 años), 4) confirmar que Elena es de reciente incorporación (Facebook: septiembre 2024).</p>
+      <p><strong>Artefactos:</strong> Organigrama (tres personas en Hacienda: Carmen es concejala → quedan Elena y Javier) + LinkedIn de Javier (empezó como interino y ya es fijo → implica antigüedad considerable, no es recién llegado) → Elena queda por eliminación.</p>
+      <p><strong>Razonamiento completo:</strong> Elena no tiene ninguna publicación en redes sociales que la confirme directamente. Los grupos necesitan: 1) saber que B está en Hacienda (del informe), 2) ver en el organigrama que Elena y Javier son los dos administrativos, 3) descartar a Javier por su LinkedIn (interino → fijo implica años, no meses), 4) concluir que debe ser Elena por eliminación. Este es el puzzle más difícil porque no hay confirmación positiva — solo eliminación del otro candidato.</p>
       <p><strong>Cortinas de humo:</strong></p>
       <p>— El tuit de Pablo sobre «menudo lío» parece relevante pero es de Urbanismo.</p>
       <p>— El post de Raquel sobre formación en Madrid es contextualmente interesante pero no ayuda con Employee B.</p>
@@ -464,51 +455,6 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
   </div>
 </div>
 
-<!-- ===== FASE 2 ===== -->
-<div class="section" id="sec-fase2">
-  <h2>Fase 2 — Anonimización correcta</h2>
-  <p>Ahora presentamos el mismo incidente, pero anonimizado correctamente. Intentad de nuevo identificar a alguien. <strong>No deberíais poder.</strong></p>
-
-  <div class="comparison">
-    <div class="card report" style="border-left-color: var(--accent); font-size:0.82rem;">
-      <span class="label-tag report-tag">❌ Fase 1: Pseudonimización incompleta</span><br>
-      <em>Empleado/a A, responsable de sistemas informáticos del Ayuntamiento, que trabaja en la segunda planta, inició su jornada laboral. Fue la primera persona del departamento de informática en conectarse ese día, como es habitual al ser la única persona del equipo que entra antes de las 08:30.</em>
-    </div>
-    <div class="card report anon" style="font-size:0.82rem;">
-      <span class="label-tag anon-tag">✅ Fase 2: Anonimización correcta</span><br>
-      <em>Un/a empleado/a del área técnica inició su jornada laboral en horario habitual. Fue quien primero detectó la actividad anómala en los sistemas.</em>
-    </div>
-  </div>
-  <div class="comparison">
-    <div class="card report" style="border-left-color: var(--accent); font-size:0.82rem;">
-      <span class="label-tag report-tag">❌ Fase 1</span><br>
-      <em>Empleado/a B, personal administrativo de la Concejalía de Hacienda, abrió un correo electrónico malicioso. Era personal de reciente incorporación y no había recibido aún la formación en ciberseguridad.</em>
-    </div>
-    <div class="card report anon" style="font-size:0.82rem;">
-      <span class="label-tag anon-tag">✅ Fase 2</span><br>
-      <em>Un/a empleado/a de un área administrativa abrió un correo electrónico malicioso. Se trataba de personal de reciente incorporación que aún no había completado la formación en ciberseguridad.</em>
-    </div>
-  </div>
-  <div class="comparison">
-    <div class="card report" style="border-left-color: var(--accent); font-size:0.82rem;">
-      <span class="label-tag report-tag">❌ Fase 1</span><br>
-      <em>Empleado/a C, la concejala responsable del área de Modernización y Transformación Digital, con más de 15 años de experiencia en el sector tecnológico, recibió la alerta. Inició el contacto con un equipo externo ya que el alcalde se encontraba en la inauguración de la nueva biblioteca.</em>
-    </div>
-    <div class="card report anon" style="font-size:0.82rem;">
-      <span class="label-tag anon-tag">✅ Fase 2</span><br>
-      <em>Un/a responsable político/a del área tecnológica recibió la alerta e inició el contacto con un equipo externo de respuesta, al no estar disponible el/la máximo/a responsable municipal en ese momento.</em>
-    </div>
-  </div>
-
-  <div class="card" style="border-left: 4px solid var(--green); margin-top: 24px;">
-    <h3 style="color: var(--green); margin-top: 0;">¿Qué ha cambiado?</h3>
-    <p><strong>Generalización:</strong> «Concejalía de Hacienda» → «un área administrativa». «Responsable de sistemas informáticos» → «empleado/a del área técnica». «La concejala» → «un/a responsable político/a».</p>
-    <p><strong>Supresión:</strong> Se eliminan detalles como la planta, el horario exacto, los años de experiencia, el género gramatical específico, y la referencia a la inauguración de la biblioteca.</p>
-    <p><strong>Desvinculación:</strong> Se rompe la conexión entre el rol y los detalles temporales o geográficos que permitían cruzar con fuentes externas.</p>
-    <p>El informe sigue siendo <strong>útil</strong> para aprender del incidente, pero ya no permite identificar a las personas implicadas.</p>
-  </div>
-</div>
-
 <!-- ===== TAKEAWAY ===== -->
 <div class="section" id="sec-takeaway">
   <h2>Conclusión</h2>
@@ -526,7 +472,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <p>En este taller, las redes sociales fueron clave para confirmar identidades. Cada publicación que hacemos añade piezas al rompecabezas:</p>
     <p>«¡Acabo de aprobar las oposiciones!» → Fecha de incorporación.<br>
     «Nueva etapa como concejala» → Cargo exacto + experiencia previa.<br>
-    «5 años ya en el Ayuntamiento» → Antigüedad, descarta que seas un recién llegado.<br>
+    «Empecé como interino y ya soy fijo» → Antigüedad, descarta que seas un recién llegado.<br>
     «Viernes de formación en Madrid» → Presencia/ausencia en fechas concretas.<br>
     <strong>«Carrera de 10km por el centro» (Strava) → Ubicación del trabajo + rutina diaria.</strong></p>
     <p>Individualmente parecen inofensivas. Combinadas con un informe mal anonimizado, <strong>son suficientes para identificaros</strong>.</p>
@@ -563,7 +509,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
 
   <h3>Preparación previa</h3>
   <div class="card">
-    <p><strong>Materiales:</strong> Imprimir el dossier (Fase 1) y la hoja de trabajo para cada grupo (3–5 personas). IMPORTANTE: imprimir la versión <strong>sin anotaciones</strong>. Opcional: rotuladores de colores. Pizarra o papel grande para la puesta en común. Tarjetas de conclusión impresas.</p>
+    <p><strong>Materiales:</strong> Imprimir el dossier y la hoja de trabajo para cada grupo (3–5 personas). IMPORTANTE: imprimir la versión <strong>sin anotaciones</strong>. Opcional: rotuladores de colores. Pizarra o papel grande para la puesta en común. Tarjetas de conclusión impresas.</p>
   </div>
 
   <h3>Guión minuto a minuto</h3>
@@ -574,16 +520,13 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     <p style="margin-top:16px;"><strong>0:05 – 0:07 | Reparto y explicación</strong></p>
     <p>Repartir dossiers y hojas de trabajo. Explicar la misión. Poner temporizador de 10 minutos.</p>
 
-    <p style="margin-top:16px;"><strong>0:07 – 0:19 | Fase 1: Trabajo en grupo</strong></p>
+    <p style="margin-top:16px;"><strong>0:07 – 0:19 | Trabajo en grupo</strong></p>
     <p>Circular entre grupos. Esperar 4–5 minutos antes de ofrecer pistas. Objetivo: que todos identifiquen al menos a una persona. Con las nuevas dificultades (Daniel, Pablo/Innovación, Javier), esperar que los grupos necesiten más tiempo que antes.</p>
 
     <p style="margin-top:16px;"><strong>0:19 – 0:24 | Puesta en común</strong></p>
-    <p>Preguntar: ¿A quién habéis identificado? ¿Cómo? Apuntar cuasi-identificadores en la pizarra. Momento clave: preguntar si alguien pensó que Pablo era Empleado/a C — discutir el género gramatical como cuasi-identificador. Si algún grupo se confundió con Daniel para Empleado/a A, discutir cómo los horarios descartaron candidatos.</p>
+    <p>Preguntar: ¿A quién habéis identificado? ¿Cómo? Apuntar cuasi-identificadores en la pizarra. Momento clave: preguntar si alguien pensó que Pablo era Empleado/a C — discutir el género gramatical como cuasi-identificador. Si algún grupo se confundió con Daniel para Empleado/a A, discutir cómo los horarios descartaron candidatos. Para Empleado/a B: preguntar cómo llegaron a Elena sin una publicación suya que lo confirmara — discutir el poder de la eliminación.</p>
 
-    <p style="margin-top:16px;"><strong>0:24 – 0:28 | Fase 2: Comparación</strong></p>
-    <p>Proyectar «Fase 2». Mostrar comparaciones lado a lado. Señalar que la versión anonimizada también neutraliza el género gramatical («un/a responsable político/a»).</p>
-
-    <p style="margin-top:16px;"><strong>0:28 – 0:33 | Conclusión</strong></p>
+    <p style="margin-top:16px;"><strong>0:24 – 0:30 | Conclusión</strong></p>
     <p>Leer frase clave. Reflexión personal (15 segundos). Bloque redes sociales — conectar con Strava. Repartir tarjetas.</p>
   </div>
 
@@ -609,7 +552,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
   <div class="card">
     <p><strong>Empleado/a C = Marta Jiménez Solano</strong> (medio-fácil) — Nombre exacto del área + género + LinkedIn.</p>
     <p><strong>Empleado/a A = Sergio Molina Torres</strong> (medio) — Organigrama (3 IT) + correo horarios → único antes de 08:30.</p>
-    <p><strong>Empleado/a B = Elena Paredes Ruiz</strong> (difícil) — Organigrama + LinkedIn Javier (5 años) + Facebook Elena (sept 2024).</p>
+    <p><strong>Empleado/a B = Elena Paredes Ruiz</strong> (difícil) — Organigrama (2 admin en Hacienda) + LinkedIn Javier (interino→fijo, implica antigüedad) → Elena por eliminación.</p>
   </div>
 
   <h3>Cortinas de humo (resumen)</h3>
@@ -623,7 +566,7 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
   <h3>Adaptaciones</h3>
   <div class="card">
     <p><strong>Si sobra tiempo:</strong> Pedir a los grupos que reescriban una frase del informe con anonimización correcta.</p>
-    <p><strong>Si falta tiempo:</strong> Mostrar Fase 2 en pantalla sin trabajarla en grupo.</p>
+    <p><strong>Si falta tiempo:</strong> Saltar directamente a la conclusión tras la puesta en común.</p>
     <p><strong>Público técnico:</strong> Mencionar k-anonimidad: «la única persona que...» = k=1. El género gramatical como cuasi-identificador es un caso de l-diversidad insuficiente.</p>
     <p><strong>Público joven:</strong> Enfatizar redes sociales y Strava. «¿Qué habéis publicado esta semana que podría ser un cuasi-identificador?»</p>
   </div>
@@ -637,15 +580,23 @@ El vector de ataque fue un correo de phishing dirigido (spear phishing) diseñad
     event.target.classList.add('active');
     window.scrollTo(0, 0);
   }
+  function toggleMode() {
+    document.body.classList.toggle('public-mode');
+    const isPublic = document.body.classList.contains('public-mode');
+    // If currently viewing a facilitator-only section, switch to Inicio
+    if (isPublic) {
+      const activeSection = document.querySelector('.section.active');
+      if (activeSection && (activeSection.id === 'sec-hints' || activeSection.id === 'sec-answers' || activeSection.id === 'sec-facilitator')) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById('sec-intro').classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.nav-btn').classList.add('active');
+      }
+    }
+  }
   function revealHint(btn, hintId) { document.getElementById(hintId).classList.toggle('show'); btn.classList.toggle('revealed'); }
   function revealAnswers() { document.getElementById('answer-block').classList.add('show'); }
   let timerInterval = null;
   function startTimer(seconds) {
     stopTimer(); let remaining = seconds; updateTimerDisplay(remaining);
-    timerInterval = setInterval(() => { remaining--; updateTimerDisplay(remaining); if (remaining <= 0) { stopTimer(); document.getElementById('timer-display').textContent = '⏰ ¡Tiempo!'; } }, 1000);
-  }
-  function stopTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
-  function updateTimerDisplay(s) { document.getElementById('timer-display').textContent = Math.floor(s/60) + ':' + (s%60 < 10 ? '0' : '') + s%60; }
-</script>
-</body>
-</html>
+    timerInterval = setInterval(() => { remaining--; updateTimerDisplay(remaining); if (remaining <=
